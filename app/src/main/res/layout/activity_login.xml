@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    tools:context=".ui.auth.login.LoginActivity"
+    tools:ignore="MissingClass">
+
+    <RelativeLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:background="@drawable/ic_city_large_black"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_deliverman_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/layout_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            style="@style/NormalAppText"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/x_large_text"
+            android:textStyle="bold"
+            android:text="@string/app_name"
+            android:layout_marginTop="@dimen/large_padding"/>
+
+        <TextView
+            style="@style/SmallAppText"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:text="@string/label_credo"
+            android:textSize="@dimen/small_text"/>
+<!--
+        <com.iko.android.courier.ui.custom.RoundedSingleLineInput
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawable="@drawable/ic_mail_outline_black_24dp"
+            android:hint="@string/label_email"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:layout_marginBottom="@dimen/small_padding"/>
+
+        <com.iko.android.courier.ui.custom.RoundedSingleLineInput
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_password"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:drawable="@drawable/ic_vpn_key_black_24dp"/>
+
+-->
+        <EditText
+            android:id="@+id/input_email"
+            android:inputType="textEmailAddress"
+            style="@style/RoundedTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/large_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:hint="@string/label_email"
+            android:drawableStart="@drawable/ic_mail_outline_black_24dp"
+            android:drawableTint="@color/colorText1"
+            android:drawablePadding="@dimen/small_padding" />
+
+
+        <EditText
+            android:id="@+id/input_password"
+            android:inputType="textPassword"
+            style="@style/RoundedTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:hint="@string/label_password"
+            android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+            android:drawableEnd="@drawable/visibility_off_24"
+            android:drawableTint="@color/colorText1"
+            android:drawablePadding="@dimen/small_padding"
+            />
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/RoundedButton"
+            android:onClick="LoginClick"
+            android:text="@string/label_login"/>
+
+        <TextView
+            android:id="@+id/editTxtRegisterOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Don't have an account? Signup"
+            android:clickable="true"
+            android:onClick="onRegisterOptionClick"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/normal_text" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

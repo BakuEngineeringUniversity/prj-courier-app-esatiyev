@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cargo.courier.CourierCargoListActivity">
+
+    <LinearLayout
+        android:id="@+id/courier_cargo_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15sp"
+        android:paddingTop="15sp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:rotation="90"
+            android:layout_gravity="left"
+            android:layout_marginStart="10sp"
+            android:clickable="true"
+            android:onClick="backToHome"
+            app:tint="@color/md_white_1000" />
+        <TextView
+            android:id="@+id/fragment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargoes"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/x_large_text"
+            android:layout_marginStart="@dimen/medium_padding"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/viewemptyCargoList"
+        android:layout_height="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/courier_cargo_list_title"
+        android:background="@android:color/transparent"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/courierCargoListContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewemptyCargoList"
+        android:name="com.iko.android.courier.ui.cargo.courier.CourierCargoListFragment"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="475dp"
+        tools:layout="@layout/fragment_courier_cargo_list"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

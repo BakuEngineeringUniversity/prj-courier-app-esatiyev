@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_grey_200"
+    tools:context=".ui.cargo.create.CreateCargoActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- title -->
+        <LinearLayout
+            android:id="@+id/create_cargo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15sp"
+            android:paddingTop="15sp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                android:rotation="90"
+                android:layout_gravity="left"
+                android:layout_marginStart="10sp"
+                android:clickable="true"
+                android:onClick="backToHome"
+                app:tint="@color/md_white_1000" />
+            <TextView
+                android:id="@+id/fragment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Cargo"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/md_white_1000"
+                android:textSize="@dimen/x_large_text"
+                android:layout_marginStart="@dimen/medium_padding"
+                />
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <!-- pickup section -->
+                <LinearLayout
+                    android:id="@+id/pick_up_address_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding"
+
+                    >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_delivery_truck_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pick up Address"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding"
+                            />
+
+
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/pickUpEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="70sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:gravity="top"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:hint="Pick Up Address"
+                        android:textColorHint="@color/colorText1"/>
+
+                </LinearLayout>
+
+                <!-- delivery section -->
+                <LinearLayout
+                    android:id="@+id/delivery_address_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding" >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_delivery_truck_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delivery Address"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding" />
+
+
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/deliveryEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="70sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:gravity="top"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:hint="Delivery Address"
+                        android:textColorHint="@color/colorText1"/>
+
+                </LinearLayout>
+
+                <!-- receiver information section -->
+                <LinearLayout
+                    android:id="@+id/receiver_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding" >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_assignment_ind_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_receiver_info"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding" />
+
+
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/receiverNameEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:drawableStart="@drawable/ic_receiver_black_24dp"
+                        android:drawableTint="@color/colorText1"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:hint="Full Name"
+                        android:textColorHint="@color/colorText1"/>
+                    <EditText
+                        android:id="@+id/receiverPhoneEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:drawableStart="@drawable/ic_local_phone_black_24dp"
+                        android:drawableTint="@color/colorText1"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:hint="Phone Number"
+                        android:textColorHint="@color/colorText1"/>
+                    <EditText
+                        android:id="@+id/receiverMailEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:drawableStart="@drawable/ic_mail_outline_black_24dp"
+                        android:drawableTint="@color/colorText1"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:hint="E-mail"
+                        android:textColorHint="@color/colorText1"/>
+
+                </LinearLayout>
+
+                <!-- Weight and Price section -->
+                <LinearLayout
+                    android:id="@+id/weight_price_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding" >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_expenses_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_weight_price"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:weightSum="2"
+                        >
+                        <EditText
+                            android:id="@+id/weightEditTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="40sp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginEnd="20sp"
+                            android:background="@drawable/bottom_border_edit_text"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text=""
+                            android:textSize="@dimen/medium_text"
+                            android:drawableStart="@drawable/ic_empty_box_white_24dp"
+                            android:drawableTint="@color/colorText1"
+                            android:drawablePadding="@dimen/small_padding"
+                            android:hint="@string/label_weight"
+                            android:textColorHint="@color/colorText1"/>
+                        <EditText
+                            android:id="@+id/priceEditTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="40sp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginEnd="20sp"
+                            android:background="@drawable/bottom_border_edit_text"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:layout_gravity="center"
+                            android:text=""
+                            android:textSize="@dimen/medium_text"
+                            android:drawableStart="@drawable/ic_expenses_black_24dp"
+                            android:drawableTint="@color/colorText1"
+                            android:drawablePadding="@dimen/small_padding"
+                            android:hint="@string/label_price"
+                            android:textColorHint="@color/colorText1"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Delivery Method section -->
+                <LinearLayout
+                    android:id="@+id/delivery_method_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding" >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_sms_failed_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_delivery_type"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding" />
+
+
+                    </LinearLayout>
+                    <Spinner
+                        android:id="@+id/spinnerOptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:textColorHint="@color/colorText1" />
+                    <!--
+                    <EditText
+                        android:id="@+id/deliveryNoteEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:gravity="top"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:hint="@string/hint_delivery_note"
+                        android:textColorHint="@color/colorText1"/> -->
+
+                </LinearLayout>
+
+                <!-- Delivery Note section -->
+                <LinearLayout
+                    android:id="@+id/delivery_note_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="15sp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="@dimen/normal_padding" >
+
+                    <LinearLayout
+                        android:background="@drawable/bottom_border_create_cargo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/normal_padding" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_sms_failed_black_24dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="15sp"
+                            app:tint="@color/colorHomeBar" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_delivery_note"
+                            android:textColor="@color/colorHomeBar"
+                            android:textSize="@dimen/large_text"
+                            android:layout_marginStart="@dimen/medium_padding" />
+
+
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/deliveryNoteEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="10sp"
+                        android:background="@drawable/bottom_border_edit_text"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:gravity="top"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textSize="@dimen/medium_text"
+                        android:hint="@string/hint_delivery_note"
+                        android:textColorHint="@color/colorText1"/>
+
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100sp"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/create"
+        style="@style/RoundedButton"
+        android:onClick="createPackage"
+        android:layout_gravity="bottom"
+        android:text="@string/label_place_order"/>
+
+    <View
+        android:id="@+id/overlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E4050505"
+        android:visibility="gone" />
+
+</FrameLayout>

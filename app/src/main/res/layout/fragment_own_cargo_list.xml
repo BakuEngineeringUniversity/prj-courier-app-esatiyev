@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.cargo.list.OwnCargoListFragment"
+    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+    >
+
+    <LinearLayout
+        android:id="@+id/own_cargo_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15sp"
+        android:paddingTop="15sp"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/fragment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Cargo"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/x_large_text"
+            android:layout_marginStart="@dimen/normal_padding"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/viewempty"
+        android:layout_height="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/own_cargo_list_title"
+        android:background="@android:color/transparent"/>
+
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/ownCargoListFragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewempty"
+        android:backgroundTint="@color/colorPrimary"
+        android:name="com.iko.android.courier.ui.cargo.list.OwnCargoScrollFragment"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="475dp"
+        tools:layout="@layout/fragment_own_cargo_scroll"/>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/own_cargo_list_title"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+
+<!--            >-->
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fitsSystemWindows="true"-->
+
+
+<!--            >-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/own_cargo_list_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10sp"-->
+<!--                android:layout_marginEnd="10sp"-->
+<!--                android:divider="@drawable/empty_divider"-->
+<!--                android:showDividers="middle"-->
+<!--                android:orientation="vertical">-->
+
+<!--            </LinearLayout>-->
+
+<!--        </ScrollView>-->
+<!--        </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

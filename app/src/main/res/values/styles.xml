@@ -1,0 +1,105 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="AuthStyle" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorText</item>
+    </style>
+
+    <style name="RoundedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/brg_rounded_button</item>
+        <item name="android:layout_margin">@dimen/normal_padding</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+        <item name="android:textSize">@dimen/large_text</item>
+    </style>
+
+    <style name="RoundedTextInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/rounded_txt</item>
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:paddingStart">8dp</item> <!-- Adjust the padding as needed -->
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+
+    <style name="TitleTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:drawablePadding">@dimen/medium_padding</item>
+    </style>
+
+    <style name="AppText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextOnPurple</item>
+        <item name="android:drawablePadding">@dimen/small_padding</item>
+    </style>
+
+    <style name="WhiteTitleAppText" parent="AppText">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/small_padding</item>
+    </style>
+
+    <style name="NormalAppText" parent="AppText">
+        <item name="android:textSize">@dimen/normal_text</item>
+    </style>
+
+    <style name="SmallAppText" parent="AppText">
+        <item name="android:textSize">@dimen/small_text</item>
+    </style>
+
+    <style name="NormalAppInputText" parent="AppText">
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:drawablePadding">@dimen/small_padding</item>
+    </style>
+
+<!--    -->
+    <style name="TitleBadgeText" parent="AppTheme">
+        <item name="android:textColor">#adafb1</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="TitleBadgeTitle" parent="AppTheme">
+        <item name="android:textColor">#adafb1</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="PersonInfoTextStyle" parent="AppTheme">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:layout_marginLeft">@dimen/normal_padding</item>
+        <item name="android:layout_marginTop">@dimen/small_padding</item>
+        <item name="android:drawablePadding">@dimen/small_padding</item>
+    </style>
+
+    <style name="CreateCargoStyle" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorText</item>
+        <item name="android:textColorSecondary">@color/colorText</item>
+    </style>
+
+    <style name="NavigationTheme" parent="AppTheme">
+        <item name="listPreferredItemHeightSmall">50sp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+
+</resources>

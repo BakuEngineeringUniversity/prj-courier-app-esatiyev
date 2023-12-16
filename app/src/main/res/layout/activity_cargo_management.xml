@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cargo.state.CargoManagementActivity">
+
+
+    <LinearLayout
+        android:id="@+id/cargo_state_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15sp"
+        android:paddingTop="15sp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:rotation="90"
+            android:layout_gravity="left"
+            android:layout_marginStart="10sp"
+            android:clickable="true"
+            android:onClick="backToOwnCargo"
+            app:tint="@color/md_white_1000" />
+        <TextView
+            android:id="@+id/fragment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cargo State"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/x_large_text"
+            android:layout_marginStart="@dimen/medium_padding"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_grey_300"
+        app:layout_constraintTop_toTopOf="@+id/cargo_state_title"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
+    </FrameLayout>
+
+
+</LinearLayout>

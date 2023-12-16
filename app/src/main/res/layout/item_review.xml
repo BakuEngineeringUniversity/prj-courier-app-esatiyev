@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rounded_layout"
+    android:backgroundTint="@color/md_white_1000"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="@dimen/small_padding"
+    android:layout_marginLeft="@dimen/small_padding"
+    android:layout_marginRight="@dimen/small_padding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/medium_image"
+            android:layout_height="@dimen/medium_image"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_profile_default_24dp"
+            app:placeholderImage="@drawable/ic_profile_default_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/reviewer_name"
+            style="@style/NormalAppText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/md_black_1000"
+            tools:android="John Smith"
+            android:text="John Smith"
+            app:layout_constraintHorizontal_weight="7"
+            app:layout_constraintTop_toTopOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/date"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/SmallAppText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:android="10.10.2010"
+            android:text="10.10.2010"
+            android:textColor="@color/colorText"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/reviewer_name"
+            android:layout_marginEnd="8dp"
+            android:gravity="right"
+            app:layout_constraintTop_toTopOf="@+id/avatar"/>
+
+        <TextView
+            android:id="@+id/review_text"
+            style="@style/NormalAppText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:android="He is best deliverman!"
+            android:text="He is best deliverman!"
+            android:textColor="@color/colorText"
+            app:layout_constraintStart_toStartOf="@+id/reviewer_name" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/reviewer_name" android:layout_marginTop="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

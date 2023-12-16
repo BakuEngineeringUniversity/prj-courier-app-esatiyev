@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_purple_24dp"
+        android:title="@string/label_home" />
+
+    <item
+        android:id="@+id/action_cargo"
+        android:icon="@drawable/ic_local_mall_blue_24dp"
+        android:title="@string/label_own_cargo" />
+
+    <item
+        android:id="@+id/action_delivers"
+        android:icon="@drawable/ic_delivers_purple_24dp"
+        android:title="@string/label_delivers" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_person_purple_24dp"
+        android:title="@string/label_profile" />
+
+</menu>

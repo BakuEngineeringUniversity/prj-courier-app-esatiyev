@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   app:cardCornerRadius="10dp"
+                                   android:layout_marginTop="@dimen/normal_padding"
+                                   android:layout_marginLeft="@dimen/small_padding"
+                                   android:layout_marginRight="@dimen/small_padding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:id="@+id/layout_left"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/layout_right"
+                android:weightSum="2" app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                    android:id="@+id/delivery_type"
+                    style="@style/NormalAppText"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/md_white_1000"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:gravity="center|top"/>
+
+            <TextView
+                    android:id="@+id/delivery_date"
+                    style="@style/NormalAppText"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/md_white_1000"
+                    android:layout_marginBottom="@dimen/normal_padding"
+                    android:gravity="center|bottom"/>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_right"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="2"
+                android:layout_height="wrap_content"
+                android:background="@color/md_white_1000"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layout_left"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                    android:id="@+id/title_from_to_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/from_to_purple"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp" android:layout_marginTop="8dp"/>
+
+            <TextView
+                    android:id="@+id/pick_up_address"
+                    style="@style/NormalAppText"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/md_black_1000"
+                    android:gravity="center|bottom" app:layout_constraintStart_toEndOf="@+id/title_from_to_dots"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/title_from_to_dots" android:layout_width="0dp"
+                    android:layout_marginStart="8dp"/>
+
+            <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp" android:layout_height="1dp"
+                    android:background="@color/colorText"
+                    app:layout_constraintStart_toStartOf="@+id/pick_up_address"
+                    app:layout_constraintTop_toBottomOf="@+id/pick_up_address"
+                    app:layout_constraintEnd_toEndOf="@+id/pick_up_address"
+            />
+
+            <TextView
+                    android:id="@+id/deliver_address"
+                    style="@style/NormalAppText"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/md_black_1000"
+                    android:gravity="center|bottom"
+                    app:layout_constraintStart_toStartOf="@+id/divider"
+                    app:layout_constraintEnd_toEndOf="@+id/pick_up_address" app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@+id/divider" android:layout_width="0dp"
+                    android:layout_marginTop="4dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_numbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/deliver_address"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginTop="16dp">
+
+                <TextView
+                        android:id="@+id/label_weight"
+                        style="@style/TitleBadgeTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_weight"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintEnd_toStartOf="@+id/label_price"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                        android:id="@+id/weight"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:text="505"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintEnd_toStartOf="@+id/title_price"
+                        app:layout_constraintTop_toBottomOf="@+id/label_weight"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+                <TextView
+                        android:id="@+id/label_price"
+                        style="@style/TitleBadgeTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_price"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center"
+                        app:layout_constraintStart_toEndOf="@+id/label_weight"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintTop_toTopOf="@+id/label_weight"
+                        app:layout_constraintEnd_toStartOf="@+id/label_request"/>
+
+                <TextView
+                        android:id="@+id/title_price"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:text="123"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        app:layout_constraintStart_toEndOf="@+id/weight"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintEnd_toStartOf="@id/request"
+                        app:layout_constraintTop_toTopOf="@+id/weight"/>
+
+                <TextView
+                        android:id="@+id/label_request"
+                        style="@style/TitleBadgeTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="ID"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center"
+                        app:layout_constraintStart_toEndOf="@+id/label_price"
+                        app:layout_constraintHorizontal_weight="2"
+                        app:layout_constraintTop_toTopOf="@+id/label_weight"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                        android:id="@+id/request"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:text="123"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        app:layout_constraintStart_toEndOf="@+id/title_price"
+                        app:layout_constraintHorizontal_weight="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/weight"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_numbers" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                        android:id="@+id/btn_delete"
+                        style="@style/RoundedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_delete"
+                        android:layout_margin="@dimen/small_padding"
+                        android:padding="0dp"
+                        android:textSize="@dimen/normal_text"/>
+
+                <Button
+                        android:id="@+id/btn_track"
+                        style="@style/RoundedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TRACK"
+                        android:layout_margin="@dimen/small_padding"
+                        android:padding="0dp"
+                        android:textSize="@dimen/normal_text"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

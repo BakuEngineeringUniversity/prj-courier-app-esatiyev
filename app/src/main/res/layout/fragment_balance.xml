@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.profile.balance.BalanceFragment">
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/earnings"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity = "center"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_padding"
+            app:cardCornerRadius="10sp">
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/large_image"
+                    android:layout_height="@dimen/large_image"
+                    android:src="@drawable/ic_earnings_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    app:tint="@color/colorPrimary" />
+
+                <TextView style="@style/NormalAppText"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/label_earnings"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/large_text"
+                    android:layout_margin="@dimen/small_padding"/>
+
+                <TextView style="@style/NormalAppText"
+                    android:gravity="center"
+                    android:text="@string/label_earn_money"
+                    android:textColor="@color/colorText"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:layout_marginLeft="@dimen/small_padding"
+                    android:layout_marginRight="@dimen/small_padding"
+                    android:layout_marginBottom="@dimen/normal_padding"/>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/expenses"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity = "center"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="@dimen/small_padding">
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_gravity="center"
+
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/large_image"
+                    android:layout_height="@dimen/large_image"
+                    android:src="@drawable/ic_expenses_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    app:tint="@color/colorPrimary" />
+
+                <TextView style="@style/NormalAppText"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/label_expenses"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/large_text"
+                    android:layout_margin="@dimen/small_padding"/>
+
+                <TextView style="@style/NormalAppText"
+                    android:gravity="center"
+                    android:text="@string/label_charging_info"
+                    android:textColor="@color/colorText"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:layout_marginLeft="@dimen/small_padding"
+                    android:layout_marginRight="@dimen/small_padding"
+                    android:layout_marginBottom="@dimen/normal_padding"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    tools:context=".ui.cargo.state.CargoStateFragment">
+
+    <RelativeLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_city_large_black"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_deliverman_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_states"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/normal_padding" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/created_time"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    app:layout_constraintHorizontal_weight="1"
+                    tools:text="12:24\n22.10.2012"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/chk_created"
+                    android:layout_marginEnd="40sp"
+                    android:backgroundTint="@color/colorPrimaryDark"/>
+
+                <CheckBox
+                    android:id="@+id/chk_created"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    android:text="@string/label_order_created"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:buttonTint="@color/md_green_A700"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/created_time"
+                    android:layoutDirection="rtl"
+                    android:checked="true"/>
+
+                <View
+                    android:id="@+id/divider_created"
+                    android:layout_width="10sp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/from_to_purple"
+                    android:backgroundTint="@color/md_yellow_A200"
+                    app:layout_constraintStart_toStartOf="@id/chk_created"
+                    app:layout_constraintTop_toBottomOf="@id/chk_created"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/courier_on_way_time"
+                    style="@style/NormalAppText"
+                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    app:layout_constraintHorizontal_weight="1"
+                    tools:text="12:24\n22.10.2012"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/chk_on_way"
+                    android:layout_marginEnd="40sp"/>
+
+                <CheckBox
+                    android:id="@+id/chk_on_way"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    android:text="@string/label_courier_on_way"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/courier_on_way_time"
+                    android:layoutDirection="rtl"
+                    android:buttonTint="@color/brg_state_activity"
+                    android:checked="false"/>
+
+                <View
+                    android:id="@+id/divider_courier_on_way"
+                    android:layout_width="10sp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/from_to_purple"
+                    android:backgroundTint="@color/md_yellow_A200"
+                    app:layout_constraintStart_toStartOf="@id/chk_on_way"
+                    app:layout_constraintTop_toBottomOf="@id/chk_on_way"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/pick_up_time"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    app:layout_constraintHorizontal_weight="1"
+                    tools:text="12:24\n22.10.2012"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/chk_pick_up"
+                    android:layout_marginEnd="40sp"/>
+
+                <CheckBox
+                    android:id="@+id/chk_pick_up"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    android:text="@string/label_pick_up_pkg"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pick_up_time"
+                    android:layoutDirection="rtl"
+                    android:buttonTint="@color/brg_state_activity"
+                    android:checked="false"/>
+
+                <View
+                    android:id="@+id/divider_pick_up"
+                    android:layout_width="10sp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/from_to_purple"
+                    android:backgroundTint="@color/md_yellow_A200"
+                    app:layout_constraintStart_toStartOf="@id/chk_pick_up"
+                    app:layout_constraintTop_toBottomOf="@id/chk_pick_up"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/deliver_time"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    app:layout_constraintHorizontal_weight="1"
+                    tools:text="12:24\n22.10.2012"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/chk_deliver"
+                    android:layout_marginEnd="40sp"/>
+
+                <CheckBox
+                    android:id="@+id/chk_deliver"
+                    style="@style/NormalAppText"
+                    android:layout_width="match_parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    android:text="@string/label_deliver_pkg"
+                    android:textSize="18sp"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/deliver_time"
+                    android:layoutDirection="rtl"
+                    android:buttonTint="@color/brg_state_activity"
+                    android:checked="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textCargoState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_states"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="@dimen/small_padding"
+        android:text="Cargo State Information"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- nav_header_main.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingTop="16sp"
+    android:background="@color/colorPrimary">
+
+    <!-- User's profile picture -->
+    <ImageView
+        android:id="@+id/header_profile_image"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_deliverman_24dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="@dimen/normal_padding"
+        />
+
+    <!-- User's name -->
+    <TextView
+        android:id="@+id/header_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Elton Satiyev \n #{user_id}"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/colorTextOnPurple"/>
+
+    <!-- Additional user details or menu items can be added here -->
+
+</LinearLayout>

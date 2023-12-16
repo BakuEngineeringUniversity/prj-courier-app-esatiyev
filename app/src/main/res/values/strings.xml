@@ -1,0 +1,99 @@
+<resources>
+
+    <!--    -->
+    <string name="label_personal_info">Personal Info</string>
+    <string name="label_exit">Sign Out</string>
+    <string name="label_reviews">Reviews</string>
+    <string name="label_balance">Balance</string>
+    <string name="label_earnings">Earnings</string>
+    <string name="label_earn_money">Start delivering and earn Money!</string>
+    <string name="label_expenses">Expenses</string>
+    <string name="label_charging_info">Delivery costs you have paid will appear here!</string>
+    <string name="warning_feature_later">This feature will be available later</string>
+    <string name="label_no_reviews">Looks like nobody has not reviewed your profile yet.</string>
+    <string name="label_ratings">Rating: %.2f</string>
+
+    <!--    -->
+    <string name="label_cargoes">Cargoes</string>
+    <string name="label_empty_list">The list is empty</string>
+    <string name="label_no_orders">Looks like nobody created order yet.</string>
+    <string name="label_no_own_cargoes">Looks like you have not created order yet.</string>
+    <string name="label_no_delivers">Looks like you have not delivered any order yet.</string>
+    <string name="label_no_request">Looks like nobody sent request for your order yet.</string>
+    <string name="label_price" translatable="false">PRICE(azn)</string>
+    <string name="label_requests" translatable="false">REQUESTS</string>
+    <string name="label_delete" translatable="false">Delete</string>
+    <string name="label_status" translatable="false">Status</string>
+    <string name="label_request" translatable="false">REQUEST</string>
+    <string name="label_weight" translatable="false">WEIGHT(kg)</string>
+    <string name="label_delivery_type" translatable="false">Delivery Method</string>
+    <string name="label_sender_info" translatable="false">Sender Information</string>
+    <string name="label_receiver_info" translatable="false">Receiver Information</string>
+    <string name="label_create_cargo">Create Cargo</string>
+    <string name="label_place_order">Place Order</string>
+    <string name="label_pickup_address">Pick up Address</string>
+    <string name="label_delivery_address">Delivery Address</string>
+    <string name="label_change_address">Change Address</string>
+    <string name="label_delivery_date">Delivery date and time</string>
+    <string name="label_date">Date</string>
+    <string name="label_time">Time</string>
+    <string name="label_type">Type</string>
+    <string name="label_fullname">Full Name</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_phone">Phone Number</string>
+    <string name="label_delivery_note">Delivery Note</string>
+    <string name="label_weight_price">Weight and Price</string>
+    <string name="label_select_time">Select Time</string>
+    <string name="hint_delivery_note">Add specific instructions to the deliveryman</string>
+    <string name="warning_can_not_be_empty">%s can not be empty!</string>
+    <string name="warning_incorrect">Incorrect %s!</string>
+    <string name="warning_incorrect_number">Incorrect number entered for %s!</string>
+    <string name="warning_empty_incorrect">Incorrect %s or empty!</string>
+    <string name="warning_choose_delivery_info">Select delivery %s!</string>
+    <string name="warning_cargo_created">Your cargo with id = %s is successfully created!</string>
+    <string name="warning_cargo_deleted">Your cargo with id = %s is successfully deleted!</string>
+    <string name="warning_request_sent">Your request for cargo with id = %s is successfully sent!</string>
+    <string name="warning_request_accept">You accepted request of %s, now you can check the status of your cargo.</string>
+
+    <string-array name="delivery_type">
+        <item>Express</item>
+        <item>ASAP</item>
+        <item>Any Time</item>
+    </string-array>
+
+    <string name="label_order_created">Order Created</string>
+    <string name="label_courier_on_way">Courier is on the way</string>
+    <string name="label_pick_up_pkg">Pick up Package</string>
+    <string name="label_deliver_pkg">Deliver package</string>
+    <string name="label_accept">Accept</string>
+    <string name="label_delivery_requests">Deliver Requests</string>
+    <string name="label_cargo_delivery_state">Cargo Delivery State</string>
+
+    <!--    -->
+    <string name="app_name">Courier</string>
+
+    <!--    -->
+    <string name="label_app_name">Courier</string>
+    <string name="label_home">Home</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_delivers">Delivers</string>
+    <string name="label_own_cargo">My Cargo</string>
+    <string name="label_greetings">Hello, %s!</string>
+    <string name="label_use_app">Start using Courier App, make your life easier!</string>
+    <string name="label_send_package">Send Package</string>
+    <string name="label_send_package_info">Create a package and choose a courier to deliver it. Your money are safe with us until the package reaches the recipient! </string>
+    <string name="label_become_courier">Become a Courier</string>
+    <string name="label_become_courier_info">Split your transportation cost by picking up packages on your way!</string>
+    <string name="label_courier_terms">Couirier Conditions and Terms</string>
+    <string name="label_courier_terms_info">See terms and conditions of using the Courier Application. By using this web site, you agree to these terms of use.</string>
+
+    <!--    -->
+    <string name="label_login">Login</string>
+    <string name="label_password">Password</string>
+    <string name="label_credo">Make it simple and easy!</string>
+    <string name="warning_wrong_creds">Wrong email or password!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_register">Signup</string>
+    <string name="confirm_password">Confirm Password</string>
+</resources>
