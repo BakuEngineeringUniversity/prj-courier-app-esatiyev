@@ -1,4 +1,5 @@
 package com.iko.android.courier.ui.cargo
 
-class PackageFetchCallback {
+interface PackageFetchCallback {
+    fun onPackageSizeFetched(size: Int)
 }

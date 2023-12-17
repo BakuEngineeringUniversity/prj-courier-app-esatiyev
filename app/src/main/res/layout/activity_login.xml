@@ -52,30 +52,7 @@
             android:textAllCaps="true"
             android:text="@string/label_credo"
             android:textSize="@dimen/small_text"/>
-<!--
-        <com.iko.android.courier.ui.custom.RoundedSingleLineInput
-            android:id="@+id/input_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawable="@drawable/ic_mail_outline_black_24dp"
-            android:hint="@string/label_email"
-            android:layout_marginLeft="@dimen/normal_padding"
-            android:layout_marginRight="@dimen/normal_padding"
-            android:layout_marginTop="@dimen/medium_padding"
-            android:layout_marginBottom="@dimen/small_padding"/>
 
-        <com.iko.android.courier.ui.custom.RoundedSingleLineInput
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_password"
-            android:layout_marginLeft="@dimen/normal_padding"
-            android:layout_marginRight="@dimen/normal_padding"
-            android:layout_marginTop="@dimen/small_padding"
-            android:layout_marginBottom="@dimen/small_padding"
-            android:drawable="@drawable/ic_vpn_key_black_24dp"/>
-
--->
         <EditText
             android:id="@+id/input_email"
             android:inputType="textEmailAddress"
@@ -92,7 +69,7 @@
             android:drawablePadding="@dimen/small_padding" />
 
 
-        <EditText
+<!--        <EditText
             android:id="@+id/input_password"
             android:inputType="textPassword"
             style="@style/RoundedTextInput"
@@ -106,8 +83,44 @@
             android:drawableStart="@drawable/ic_vpn_key_black_24dp"
             android:drawableEnd="@drawable/visibility_off_24"
             android:drawableTint="@color/colorText1"
-            android:drawablePadding="@dimen/small_padding"
-            />
+            android:drawablePadding="@dimen/small_padding" />-->
+
+        <RelativeLayout
+            android:id="@+id/rl_password"
+            style="@style/RoundedTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            >
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/img_password"
+                android:background="#00000000"
+                android:hint="@string/label_password"
+                android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+                android:drawableTint="@color/colorText1"
+                android:drawablePadding="@dimen/small_padding"
+                android:ems="10"/>
+
+            <ImageView
+                android:id="@+id/img_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/visibility_off_24"
+                android:backgroundTint="@color/colorText1"
+                android:clickable="true"
+                android:onClick="togglePassword"/>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_login"
@@ -121,11 +134,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
             android:layout_gravity="center_horizontal"
-            android:text="Don't have an account? Signup"
             android:clickable="true"
             android:onClick="onRegisterOptionClick"
+            android:text="Don't have an account? Signup"
             android:textColor="@color/colorText1"
-            android:textSize="@dimen/normal_text" />
+            android:textSize="@dimen/large_text" />
 
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.navigation.NavigationView
@@ -27,17 +28,12 @@ class ProfileFragment : Fragment() {
     private lateinit var balance_tab: TextView
     private lateinit var childFragmentContainer: FragmentContainerView
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        val fragmentTransaction = childFragmentManager.beginTransaction()
-//        val childFragment = BalanceFragment()
-//        fragmentTransaction.replace(R.id.tabFragmentContainerView, childFragment)
-//        fragmentTransaction.commit()
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-
 
 
         val fullNameTitle = view.findViewById<TextView>(R.id.profile_title)
@@ -63,11 +59,18 @@ class ProfileFragment : Fragment() {
         val drawerLayout: DrawerLayout = view.findViewById(R.id.drawerLayout)
         val navigationView: NavigationView = view.findViewById(R.id.navigationView)
 
-        val headerView = navigationView.getHeaderView(0)
-        val headerProfileName = headerView.findViewById<TextView>(R.id.header_profile_name)
+//        val headerView = navigationView.getHeaderView(0)
 
-        val headerProfileTitle = "$fullName \n #${UserManager.id}"
-        headerProfileName.text = headerProfileTitle
+//        val headerProfileName = headerView.findViewById<TextView>(R.id.header_profile_name)
+
+//        val headerProfileTitle = "$fullName \n #${UserManager.id}"
+//        headerProfileName.text = headerProfileTitle
+
+        drawerLayout.setScrimColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryTransparent));
+
+
+
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_sign_out -> {

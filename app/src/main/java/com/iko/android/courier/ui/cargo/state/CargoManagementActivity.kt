@@ -45,4 +45,5 @@ class CargoManagementActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }

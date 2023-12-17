@@ -1,18 +1,21 @@
 package com.iko.android.courier.ui.cargo.delivers
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.lifecycleScope
 import com.iko.android.courier.R
-import com.iko.android.courier.data.model.Package
-import com.iko.android.courier.ui.cargo.list.OwnCargoList
-import com.iko.android.courier.ui.cargo.state.CargoManagementActivity
-import java.util.UUID
+import com.iko.android.courier.UserManager
+import com.iko.android.courier.api.RetrofitInstance
+import com.iko.android.courier.ui.cargo.PackageFetchCallback
+import kotlinx.coroutines.launch
+
 
 
 class DeliversCargoListFragment : Fragment() {
@@ -21,12 +24,54 @@ class DeliversCargoListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var isCourier = true
-        var deliveries_number = 1
-        if(isCourier)
-            if(deliveries_number == 0)
-                return inflater.inflate(R.layout.item_empty_list_delivers, container, false)
+        Log.d("DeliversCargoListFragment", "${UserManager.isCourier}")
+        if (UserManager.isCourier != true) {
+            val rootView = inflater.inflate(R.layout.item_empty_list_delivers, container, false)
+            val deliversListTitle = rootView.findViewById<LinearLayout>(R.id.delivers_list_title)
+            deliversListTitle.visibility = View.VISIBLE
+            val title = rootView.findViewById<TextView>(R.id.title_delivers)
+            val subtitle = rootView.findViewById<TextView>(R.id.subtitle_delivers)
+            title.text = "YOu are Not CooRier"
+            subtitle.text = "Please Bevcome courier"
+            return rootView
+        }
+        val rootView = inflater.inflate(R.layout.fragment_delivers_cargo_list, container, false)
 
-        return inflater.inflate(R.layout.fragment_delivers_cargo_list, container, false)
+        val deliversCargoListFragmentContainerView =
+            rootView.findViewById<FragmentContainerView>(R.id.DeliversCargoListFragmentContainerView)
+
+        // Check if the package list is empty
+        fetchPackages(object : PackageFetchCallback {
+            override fun onPackageSizeFetched(size: Int) {
+                if (size != 0) {
+                    deliversCargoListFragmentContainerView.visibility = View.VISIBLE
+                } else {
+                    deliversCargoListFragmentContainerView.visibility = View.GONE
+                    val emptyLayout =
+                        inflater.inflate(R.layout.item_empty_list_delivers, container, false)
+                    (rootView as ViewGroup).addView(emptyLayout)
+                }
+            }
+        })
+
+        return rootView
+
     }
+
+
+    private fun fetchPackages(callback: PackageFetchCallback) {
+        val apiService = RetrofitInstance.apiService
+
+        lifecycleScope.launch {
+            try {
+                val packages = apiService.getPackagesByCourierId(UserManager.id!!)
+                Log.d("DeliversCargoListFragment", "packages size ${packages.size}")
+                callback.onPackageSizeFetched(packages.size)
+            } catch (e: Exception) {
+                Log.e("CargoManagementActivity", "Error fetching packages: ${e.message}")
+                callback.onPackageSizeFetched(0)
+            }
+        }
+    }
+
 }

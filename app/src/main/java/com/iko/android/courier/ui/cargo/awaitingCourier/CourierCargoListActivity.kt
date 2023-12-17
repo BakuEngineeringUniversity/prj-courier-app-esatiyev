@@ -1,10 +1,9 @@
-package com.iko.android.courier.ui.cargo.courier
+package com.iko.android.courier.ui.cargo.awaitingCourier
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import com.iko.android.courier.R
 import com.iko.android.courier.ui.main.MainActivity
 

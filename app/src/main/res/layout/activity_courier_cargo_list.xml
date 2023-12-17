@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cargo.courier.CourierCargoListActivity">
+    tools:context=".ui.cargo.awaitingCourier.CourierCargoListActivity">
 
     <LinearLayout
         android:id="@+id/courier_cargo_list_title"
@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewemptyCargoList"
-        android:name="com.iko.android.courier.ui.cargo.courier.CourierCargoListFragment"
+        android:name="com.iko.android.courier.ui.cargo.awaitingCourier.CourierCargoListFragment"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="475dp"
         tools:layout="@layout/fragment_courier_cargo_list"/>

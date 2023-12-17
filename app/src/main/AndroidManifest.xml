@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".ui.cargo.courier.CourierCargoListActivity"
+            android:name=".ui.cargo.awaitingCourier.CourierCargoListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.terms.TermsActivity"
@@ -47,7 +47,7 @@
             android:name=".ui.cargo.state.CargoManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.cargo.list.OwnCargoList"
+            android:name=".ui.cargo.ownCargo.OwnCargoList"
             android:exported="false" />
         <activity
             android:name=".ui.cargo.create.CreateCargoActivity"

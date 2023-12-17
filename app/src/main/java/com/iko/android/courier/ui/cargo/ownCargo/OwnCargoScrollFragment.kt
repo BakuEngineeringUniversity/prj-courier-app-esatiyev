@@ -1,4 +1,4 @@
-package com.iko.android.courier.ui.cargo.list
+package com.iko.android.courier.ui.cargo.ownCargo
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isNotEmpty
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,8 +21,6 @@ import com.iko.android.courier.ui.cargo.state.CargoManagementActivity
 import com.iko.android.courier.viewmodel.CargoViewModel
 import com.iko.android.courier.viewmodel.factory.CargoViewModelFactory
 import kotlinx.coroutines.launch
-import java.util.ArrayList
-import java.util.UUID
 
 class OwnCargoScrollFragment : Fragment() {
 
@@ -38,6 +35,11 @@ class OwnCargoScrollFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Lazily initialize ViewModel
+        viewModel = ViewModelProvider(
+            this,
+            CargoViewModelFactory(RetrofitInstance.apiService)
+        )[CargoViewModel::class.java]
 
         rootView = inflater.inflate(R.layout.fragment_own_cargo_scroll, container, false)
 
@@ -48,17 +50,15 @@ class OwnCargoScrollFragment : Fragment() {
     }
 
     private fun fetchPackages() {
-        viewModel = ViewModelProvider(this, CargoViewModelFactory(RetrofitInstance.apiService))[CargoViewModel::class.java]
-
         // Observe changes in customer packages
         viewModel.customerPackages.observe(viewLifecycleOwner, Observer { packages ->
             // Update UI with the list of packages
             // For now, you can log the packages to check if they are fetched correctly
+
             Log.d("CargoFragment", "Packages: ${packages.size}")
             packages.forEach { packet ->
                 Log.d("CargoFragment", "Package: ${packet.id}, ${packet.deliveryMethod}, ${packet.createdDate}, ${packet.pickUpAddress}, ${packet.deliverAddress}, ${packet.weight}, ${packet.price}, ${packet.customer}")
             }
-
             // Fetch or generate review data (e.g., from an API or a local data source)
             showPackages(packages)
         })
@@ -66,6 +66,7 @@ class OwnCargoScrollFragment : Fragment() {
         // Fetch customer packages
         viewModel.fetchCustomerPackages()
     }
+
     private fun showPackages(packages: List<Package>) {
         //         Fetch or generate review data (e.g., from an API or a local data source)
         cargoesLayout = rootView.findViewById<LinearLayout>(R.id.own_cargo_list_layout)

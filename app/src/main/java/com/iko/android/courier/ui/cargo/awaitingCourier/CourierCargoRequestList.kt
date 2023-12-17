@@ -1,4 +1,4 @@
-package com.iko.android.courier.ui.cargo.courier
+package com.iko.android.courier.ui.cargo.awaitingCourier
 
 data class CourierCargoRequestList(
     val reviewerName: String,

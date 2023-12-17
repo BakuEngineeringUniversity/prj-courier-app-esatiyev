@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.cargo.list.OwnCargoListFragment"
+    tools:context=".ui.cargo.ownCargo.OwnCargoListFragment"
     app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
     >
 
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewempty"
         android:backgroundTint="@color/colorPrimary"
-        android:name="com.iko.android.courier.ui.cargo.list.OwnCargoScrollFragment"
+        android:name="com.iko.android.courier.ui.cargo.ownCargo.OwnCargoScrollFragment"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="475dp"
         tools:layout="@layout/fragment_own_cargo_scroll"/>

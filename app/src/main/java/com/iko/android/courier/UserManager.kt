@@ -5,6 +5,10 @@ import com.iko.android.courier.data.model.Package
 import com.iko.android.courier.data.model.Review
 
 object UserManager {
+    fun getFullName(): String {
+        return "$firstname $lastname"
+    }
+
     var id: Long? = null
     var firstname: String? = null
     var lastname: String? = null
@@ -20,6 +24,7 @@ object UserManager {
     var packages: MutableList<Package>? = mutableListOf()
     var ordersNumber: Int = 0
     var expenses: Float = 0f
+    var isCourier: Boolean? = false
     var deliversNumber: Int = 0
     var rating: Int = 0
     var deliveriesPackages: MutableList<Package>? = mutableListOf()
