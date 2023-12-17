@@ -32,7 +32,7 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/disagree"
+                android:id="@+id/btnDisagree"
                 android:textColor="@color/md_white_1000"
                 android:textSize="14sp"
                 android:text="DISAGREE"
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
-                android:id="@+id/agree"
+                android:id="@+id/btnAgree"
                 android:textColor="@color/md_white_1000"
                 android:textSize="14sp"
                 android:text="AGREE"

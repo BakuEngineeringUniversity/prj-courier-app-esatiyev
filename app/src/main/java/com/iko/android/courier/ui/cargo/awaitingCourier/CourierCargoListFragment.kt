@@ -1,4 +1,4 @@
-package com.iko.android.courier.ui.cargo.courier
+package com.iko.android.courier.ui.cargo.awaitingCourier
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -16,9 +15,7 @@ import com.iko.android.courier.R
 import com.iko.android.courier.UserManager
 import com.iko.android.courier.api.RetrofitInstance
 import com.iko.android.courier.data.model.Package
-import com.iko.android.courier.ui.cargo.list.OwnCargoList
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 
 class CourierCargoListFragment : Fragment() {

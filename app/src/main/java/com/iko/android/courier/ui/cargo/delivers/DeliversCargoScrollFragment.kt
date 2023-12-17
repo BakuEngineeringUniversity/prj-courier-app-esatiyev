@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isNotEmpty
 import androidx.lifecycle.lifecycleScope
 import com.iko.android.courier.R
@@ -45,13 +46,33 @@ class DeliversCargoScrollFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val packages = apiService.getPackagesByCourierId(UserManager.id!!)
+                Log.d("DeliversCargoScrollFragment", "packages size ${packages.size}")
 
-                showPackages(packages)
+                if (packages.isNotEmpty()) {
+                    showPackages(packages)
+                } else {
+                    showEmptyLayout()
+                }
             } catch (e: Exception) {
                 Log.e("CargoManagementActivity", "Error fetching packages: ${e.message}")
+                showEmptyLayout()
             }
         }
+
     }
+
+    private fun showEmptyLayout() {
+        if (rootView != null) {
+            val cargoesLayout = rootView.findViewById<ConstraintLayout>(R.id.empty_fragment)
+            cargoesLayout?.visibility = View.VISIBLE
+
+            val overlayView = activity?.findViewById<View>(R.id.delivers_overlayView)
+            overlayView?.visibility = View.GONE
+        }
+    }
+
+
+
     private fun showPackages(cargoes: List<Package>) {
         val cargoesLayout = rootView.findViewById<LinearLayout>(R.id.delivers_cargo_list_layout)
 

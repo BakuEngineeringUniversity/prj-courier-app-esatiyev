@@ -48,5 +48,8 @@ data class Customer(
     val ordersNumber: Int = 0,
     @SerializedName("expenses")
     @Expose
-    val expenses: Float = 0f
+    val expenses: Float = 0f,
+    @SerializedName("isCourier")
+    @Expose
+    val isCourier: Boolean = false
 )

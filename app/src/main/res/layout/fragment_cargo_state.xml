@@ -207,17 +207,53 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
+<!--    <TextView
         android:id="@+id/textCargoState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layout_states"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="@dimen/small_padding"
         android:text="Cargo State Information"
         android:textSize="20sp"
         android:textColor="@android:color/black"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@id/layout_states"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+            android:id="@+id/callCourier"
+            android:clickable="true"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20sp"
+            android:backgroundTint="@color/md_green_600"
+            android:background="@drawable/brg_rounded_button"
+            android:text="Call"
+            android:textColor="@color/md_white_1000"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/writeReview"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20sp"
+            android:backgroundTint="@color/md_blue_500"
+            android:background="@drawable/brg_rounded_button"
+            android:text="Write a review"
+            android:textColor="@color/md_white_1000"
+            android:textStyle="normal"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

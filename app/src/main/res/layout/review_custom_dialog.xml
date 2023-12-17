@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/md_white_1000"
+    app:cardCornerRadius="20sp"
+    android:layout_marginHorizontal="0sp" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Write a Review"
+            android:textAlignment="center"
+            android:id="@+id/reviewTitle"
+            android:textColor="@color/colorText1"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:layout_marginTop="20dp"
+            android:progressTint="@color/md_yellow_A200"
+            android:progressBackgroundTint="@color/colorText1" />
+
+        <EditText
+            android:id="@+id/commentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:maxLength="150"
+            android:hint="Write your comment"
+            android:gravity="start"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:textColor="@color/md_white_1000"
+                android:textSize="14sp"
+                android:text="Cancel"
+                android:layout_margin="5dp"
+                android:backgroundTint="#A4A4A4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/submitReviewButton"
+                android:textColor="@color/md_white_1000"
+                android:textSize="14sp"
+                android:text="Submit Review"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

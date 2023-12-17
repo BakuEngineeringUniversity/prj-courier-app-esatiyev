@@ -6,23 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--
-        <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/icon"
-                android:layout_width="@dimen/large_image"
-                android:layout_height="@dimen/large_image"
-                app:roundAsCircle="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:placeholderImage="@drawable/ic_empty_box_white_24dp"
-                app:backgroundImage="@color/colorPrimary"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/title"
-                tools:ignore="MissingClass" />
-                -->
-
 
     <LinearLayout
+        android:id="@+id/delivers_list_title"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15sp"
@@ -50,7 +37,7 @@
         android:layout_height="50dp"
 
         android:background="@drawable/circle_background"
-        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintBottom_toTopOf="@+id/title_delivers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="8dp"
@@ -69,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_delivers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_empty_list"
@@ -82,14 +69,14 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/subtitle"
+        android:id="@+id/subtitle_delivers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_no_delivers"
         android:textColor="#686868"
         android:textSize="16sp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title_delivers"
         android:layout_marginTop="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

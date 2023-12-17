@@ -1,27 +1,34 @@
 package com.iko.android.courier.ui.main
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.view.Menu
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iko.android.courier.R
+import com.iko.android.courier.UserManager
+import com.iko.android.courier.api.RetrofitInstance
+import com.iko.android.courier.data.model.Courier
+import com.iko.android.courier.data.model.Customer
 import com.iko.android.courier.ui.auth.login.LoginActivity
-import com.iko.android.courier.ui.cargo.courier.CourierCargoListActivity
+import com.iko.android.courier.ui.cargo.awaitingCourier.CourierCargoListActivity
 import com.iko.android.courier.ui.cargo.create.CreateCargoActivity
 import com.iko.android.courier.ui.cargo.delivers.DeliversCargoListFragment
-import com.iko.android.courier.ui.cargo.list.OwnCargoListFragment
+import com.iko.android.courier.ui.cargo.ownCargo.OwnCargoListFragment
 import com.iko.android.courier.ui.profile.ProfileFragment
 import com.iko.android.courier.ui.terms.TermsActivity
-import java.lang.Thread.sleep
+import kotlinx.coroutines.launch
+import java.util.IllegalFormatException
 
 
 class MainActivity : AppCompatActivity() {
@@ -128,15 +135,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun becomeCourierClicked(view: View) {
-        val intent = Intent(this, CourierCargoListActivity::class.java)
-        startActivity(intent)
+        if (UserManager.isCourier == true) {
+            val intent = Intent(this, CourierCargoListActivity::class.java)
+            startActivity(intent)
+        }
+        else {
+            showCustomDialogBox()
+        }
     }
 
 
 
     fun signOutClicked(item: MenuItem) {
         Toast.makeText(applicationContext, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
-        sleep(2000)
         val intent = Intent(applicationContext, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -153,5 +164,79 @@ class MainActivity : AppCompatActivity() {
             // If the current fragment is not HomeFragment, navigate to HomeFragment
             replaceFragment(HomeFragment())
         }
+    }
+
+    private fun showCustomDialogBox() {
+        val overlayView = findViewById<View>(R.id.delivers_overlayView)
+        overlayView?.visibility = View.VISIBLE
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.become_courier_custom_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val btnAgree = dialog.findViewById<Button>(R.id.btnAgree)
+        val btnDisagree = dialog.findViewById<Button>(R.id.btnDisagree)
+
+
+        btnAgree.setOnClickListener {
+            val apiService = RetrofitInstance.apiService
+
+            val newCourier = Courier(
+                id = UserManager.id,
+                firstname = UserManager.firstname,
+                lastname = UserManager.lastname,
+                username = UserManager.username,
+                email = UserManager.email,
+                password = UserManager.password,
+                fin = UserManager.fin,
+                serialNo = UserManager.serialNo,
+                age = UserManager.age,
+                gender = UserManager.gender,
+                phone = UserManager.phone,
+                address = UserManager.address
+            )
+
+            lifecycleScope.launch {
+                try {
+                    val courier = apiService.createCourier(newCourier)
+
+                    Toast.makeText(applicationContext, "You are now a courier with id = ${courier.id}.",
+                        Toast.LENGTH_SHORT).show()
+
+                    dialog.dismiss()
+                    overlayView?.visibility = View.GONE
+
+                    UserManager.isCourier = true
+
+                    val updatedCustomer = Customer(
+                        isCourier = true
+                    )
+                    val customer = apiService.updateCustomer(UserManager.id!!, updatedCustomer)
+
+                    val intent = Intent(this@MainActivity, CourierCargoListActivity::class.java)
+                    startActivity(intent)
+//                    becomeCourierClicked()
+                } catch (e : IllegalFormatException) {
+                    Log.e("Become Courier", "IllegalFormatException: ${e.message}")
+                    Toast.makeText(applicationContext, "Occur a error, please try again!", Toast.LENGTH_SHORT).show()
+                }
+                catch (e: Exception) {
+                    Log.e("Update Package Step", "Error while creating courier: ${e.message}")
+                    Toast.makeText(applicationContext, "Occur a error, please try again!", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+        btnDisagree.setOnClickListener {
+            Toast.makeText(applicationContext, "Cancel clicked", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+
+            overlayView?.visibility = View.GONE
+        }
+
+        dialog.show()
     }
 }

@@ -3,10 +3,13 @@ package com.iko.android.courier.ui.auth.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.iko.android.courier.R
@@ -65,6 +68,26 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun togglePassword(view: View) {
+        val image = findViewById<ImageView>(R.id.img_password)
+
+        val passwordEditText = findViewById<EditText>(R.id.input_password)
+        val currentTransformationMethod = passwordEditText.transformationMethod
+
+        // Toggle between visible and password transformations
+        if (currentTransformationMethod == null) {
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            image.background = ContextCompat.getDrawable(this, R.drawable.visibility_off_24)
+        } else {
+            passwordEditText.transformationMethod = null // This removes the transformation, making the text visible
+            image.background = ContextCompat.getDrawable(this, R.drawable.visibility_24)
+        }
+
+
+        // Move the cursor to the end of the text
+        passwordEditText.setSelection(passwordEditText.text.length)
     }
 
 

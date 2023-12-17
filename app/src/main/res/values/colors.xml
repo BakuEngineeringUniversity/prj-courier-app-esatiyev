@@ -2,7 +2,7 @@
 <resources>
 <!--    <color name="colorPrimary">#594691</color>-->
     <color name="colorPrimary">#4e008e</color>
-
+    <color name="colorPrimaryTransparent">#72000000</color>
     <color name="colorStatusBar">#360063</color>
     <color name="colorNavigationBar">#C6C6C6</color>
     <color name="colorHomeBar">#42036E</color>

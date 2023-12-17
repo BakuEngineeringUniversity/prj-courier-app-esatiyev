@@ -55,8 +55,10 @@ class LoginViewModel(private val apiService: ApiService) : ViewModel() {
                             UserManager.phone = customer.phone
                             UserManager.address = customer.address
                             UserManager.email = customer.email
+                            UserManager.password = customer.password
                             UserManager.ordersNumber = customer.ordersNumber
                             UserManager.expenses = customer.expenses
+                            UserManager.isCourier = customer.isCourier
 //                        }
 
 //                       val courier: Courier = apiService.getCourierById(loginResponse.customerId)
