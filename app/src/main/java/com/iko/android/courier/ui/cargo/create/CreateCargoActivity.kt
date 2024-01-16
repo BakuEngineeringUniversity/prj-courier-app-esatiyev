@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Address
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -18,17 +20,23 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import com.iko.android.courier.R
 import com.iko.android.courier.UserManager
 import com.iko.android.courier.api.RetrofitInstance
 import com.iko.android.courier.ui.main.MainActivity
 import com.iko.android.courier.data.model.Package
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 
-class CreateCargoActivity : AppCompatActivity() {
-    private lateinit var pickUpAddress: Editable
-    private lateinit var deliveryAddress: Editable
+class CreateCargoActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var map: GoogleMap
+
+//    private lateinit var pickUpAddress: TextView
+//    private lateinit var deliveryAddress: TextView
     private lateinit var receiverFullName: Editable
     private lateinit var receiverPhone: Editable
     private lateinit var receiverEmail: Editable
@@ -37,7 +45,20 @@ class CreateCargoActivity : AppCompatActivity() {
     private lateinit var deliveryNote: Editable
 
     private lateinit var selectedOption: String
+    private lateinit var data: Array<String>
     private lateinit var btnPlaceOrder: Button
+
+    private lateinit var selectedLocation: LatLng  // Add this line
+
+
+    private var pickUpLocation: LatLng? = null
+    private var deliveryLocation: LatLng? = null
+    private lateinit var pickUpAddressTextView: TextView
+    private lateinit var deliveryAddressTextView: TextView
+    companion object {
+        private const val PICK_UP_LOCATION_REQUEST_CODE = 1
+        private const val DELIVERY_LOCATION_REQUEST_CODE = 2
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +66,14 @@ class CreateCargoActivity : AppCompatActivity() {
         window.navigationBarColor = resources.getColor(R.color.md_grey_200)
         window.statusBarColor = resources.getColor(R.color.colorStatusBar)
 
-        val data = arrayOf("Standard", "Express", "Overnight")
+        pickUpAddressTextView = findViewById(R.id.pickUpEditTxt)
+        deliveryAddressTextView = findViewById(R.id.deliveryEditTxt)
+
+        // Initialize map fragment
+//        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
+
+        data = arrayOf("Standard", "Express", "Overnight")
 
         val adapter = ArrayAdapter(
             this,
@@ -69,7 +97,71 @@ class CreateCargoActivity : AppCompatActivity() {
                 // Do nothing here
             }
         }
+
+        // Other initialization code...
+
+// Set click listeners for pickup and delivery location buttons
+        findViewById<Button>(R.id.btnSelectPickUpLocation).setOnClickListener {
+            openMapActivity(PICK_UP_LOCATION_REQUEST_CODE)
+        }
+
+        findViewById<Button>(R.id.btnSelectDeliveryLocation).setOnClickListener {
+            openMapActivity(DELIVERY_LOCATION_REQUEST_CODE)
+        }
     }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        // You can customize map settings and add markers here if needed
+    }
+
+
+    // Open MapActivity to let the user select a location
+    private fun openMapActivity(requestCode: Int) {
+        val intent = Intent(this, MapActivity::class.java)
+        if (requestCode == PICK_UP_LOCATION_REQUEST_CODE) {
+//            if (pickUpLocation?.latitude != null && pickUpLocation?.longitude != null) {
+                intent.putExtra("currentLatitude", pickUpLocation?.latitude)
+                intent.putExtra("currentLongitude", pickUpLocation?.longitude)
+//            }
+        } else if (requestCode == DELIVERY_LOCATION_REQUEST_CODE) {
+//            if (deliveryLocation?.latitude != null && deliveryLocation?.longitude != null) {
+                intent.putExtra("currentLatitude", deliveryLocation?.latitude)
+                intent.putExtra("currentLongitude", deliveryLocation?.longitude)
+//            }
+        }
+        startActivityForResult(intent, requestCode)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("CreateCargoActivity", "onActivityResult called. RequestCode: $requestCode, ResultCode: $resultCode")
+
+        if (resultCode == RESULT_OK && data != null) {
+            val latitude = data.getDoubleExtra("latitude", 0.0)
+            val longitude = data.getDoubleExtra("longitude", 0.0)
+            val address = data.getStringExtra("address")?:"Address not available"
+            val location = LatLng(latitude, longitude)
+
+            when (requestCode) {
+                PICK_UP_LOCATION_REQUEST_CODE -> {
+                    pickUpLocation = location
+                    pickUpAddressTextView.text = getAddress(address)
+                }
+                DELIVERY_LOCATION_REQUEST_CODE -> {
+                    deliveryLocation = location
+                    deliveryAddressTextView.text = getAddress(address)
+                }
+            }
+        }
+    }
+
+
+    private fun getAddress(address: String): String {
+        return address
+    }
+
 
     fun backToHome(view: View) {
         val intent = Intent(this, MainActivity::class.java)
@@ -80,8 +172,8 @@ class CreateCargoActivity : AppCompatActivity() {
     fun createPackage(view: View) {
         btnPlaceOrder = findViewById(R.id.create)
 
-        pickUpAddress = findViewById<EditText>(R.id.pickUpEditTxt).text
-        deliveryAddress = findViewById<EditText>(R.id.deliveryEditTxt).text
+//        val pickUpAddress: String = pickUpAddressTextView.text.toString()
+//        val deliveryAddress = deliveryAddressTextView.text.toString()
         receiverFullName = findViewById<EditText>(R.id.receiverNameEditTxt).text
         receiverPhone = findViewById<EditText>(R.id.receiverPhoneEditTxt).text
         receiverEmail = findViewById<EditText>(R.id.receiverMailEditTxt).text
@@ -93,8 +185,7 @@ class CreateCargoActivity : AppCompatActivity() {
         val packageWeightAsFloat: Float
         val packagePriceAsFloat: Float
 
-        if (pickUpAddress.isEmpty() || deliveryAddress.isEmpty() || receiverFullName.isEmpty()
-            || receiverPhone.isEmpty() || receiverEmail.isEmpty() || packageWeight.isEmpty()
+        if (receiverFullName.isEmpty() || receiverPhone.isEmpty() || receiverEmail.isEmpty() || packageWeight.isEmpty()
             || packagePrice.isEmpty() || deliveryNote.isEmpty()) {
 
             Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show()
@@ -115,21 +206,37 @@ class CreateCargoActivity : AppCompatActivity() {
             return
         }
 
+        if (pickUpLocation == null || pickUpAddressTextView.text.isEmpty()) {
+            Toast.makeText(this, "Please select a pick-up location on the map", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (deliveryLocation == null || deliveryAddressTextView.text.isEmpty()) {
+            Toast.makeText(this, "Please select a delivery location on the map", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val packet = Package(
             packageName="test",
             weight = packageWeightAsFloat,
             price = packagePriceAsFloat,
             deliveryMethod = selectedOption,
-            deliverAddress = deliveryAddress.toString(),
-            pickUpAddress = pickUpAddress.toString(),
+            deliverLatitude = deliveryLocation?.latitude,
+            deliverLongitude = deliveryLocation?.longitude,
+            deliverAddress = deliveryAddressTextView.text.toString(),
+            pickUpLatitude = pickUpLocation?.latitude,
+            pickUpLongitude = pickUpLocation?.longitude,
+            pickUpAddress = pickUpAddressTextView.text.toString(),
             receiverFullName = receiverFullName.toString(),
             receiverPhone = receiverPhone.toString(),
             receiverEmail = receiverEmail.toString(),
-            senderFullName = UserManager.firstname + " " + UserManager.lastname,
+            senderFullName = UserManager.getFullName(),
             senderPhone = UserManager.phone,
             senderEmail = UserManager.email,
             deliveryNote = deliveryNote.toString()
         )
+
+
 
         val apiService = RetrofitInstance.apiService
         lifecycleScope.launch {
@@ -176,8 +283,12 @@ class CreateCargoActivity : AppCompatActivity() {
     }
 
     private fun clearDetail(){
-        pickUpAddress.clear()
-        deliveryAddress.clear()
+        deliveryAddressTextView.text = ""
+        pickUpAddressTextView.text = ""
+        pickUpLocation = null
+        deliveryLocation = null
+
+        selectedOption = data[0]
         receiverFullName.clear()
         receiverPhone.clear()
         receiverEmail.clear()
