@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         window.statusBarColor = resources.getColor(R.color.colorPrimary)
         window.navigationBarColor = resources.getColor(R.color.md_white_1000)
 
-        viewModel = ViewModelProvider(this, LoginViewModelFactory(RetrofitInstance.apiService))[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this, LoginViewModelFactory(RetrofitInstance.apiService, applicationContext))[LoginViewModel::class.java]
 
         emailEditText = findViewById(R.id.input_email)
         passwordEditText = findViewById(R.id.input_password)

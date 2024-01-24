@@ -55,39 +55,22 @@ class ProfileFragment : Fragment() {
         val ratingNumber = "Rating: " + UserManager.rating
         rating.text = ratingNumber
 
-//
         val drawerLayout: DrawerLayout = view.findViewById(R.id.drawerLayout)
         val navigationView: NavigationView = view.findViewById(R.id.navigationView)
 
-//        val headerView = navigationView.getHeaderView(0)
-
-//        val headerProfileName = headerView.findViewById<TextView>(R.id.header_profile_name)
-
-//        val headerProfileTitle = "$fullName \n #${UserManager.id}"
-//        headerProfileName.text = headerProfileTitle
-
         drawerLayout.setScrimColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryTransparent));
-
-
-
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_sign_out -> {
-                    // Handle sign-out
-                    // Call your sign-out logic here
                     drawerLayout.closeDrawer(Gravity.RIGHT)
                     true
                 }
                 R.id.menu_settings -> {
-                    // Handle settings
-                    // Open settings fragment or perform any action
                     drawerLayout.closeDrawer(Gravity.RIGHT)
                     true
                 }
                 R.id.menu_customer_support -> {
-                    // Handle customer support
-                    // Open customer support fragment or perform any action
                     drawerLayout.closeDrawer(Gravity.RIGHT)
                     true
                 }
@@ -101,7 +84,6 @@ class ProfileFragment : Fragment() {
             drawerLayout.openDrawer(Gravity.RIGHT)
         }
 
-//
         reviews_tab = view.findViewById(R.id.reviews_tab)
         balance_tab = view.findViewById(R.id.balance_tab)
         childFragmentContainer = view.findViewById(R.id.tabFragmentContainerView)
@@ -133,7 +115,6 @@ class ProfileFragment : Fragment() {
 //            reviews_tab?.background?.isVisible?.equals(false)
             reviews_tab.background = resources.getDrawable(com.google.android.material.R.color.mtrl_btn_transparent_bg_color)
             balance_tab.background = resources.getDrawable(R.drawable.bottom_border_no_background)
-
         }
 
         // ilk defe hansi child fragment gostersin :
@@ -142,12 +123,6 @@ class ProfileFragment : Fragment() {
         transaction.commit()
 
         return view
-
-
-        //return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-
-
-
 
 }

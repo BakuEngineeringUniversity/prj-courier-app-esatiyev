@@ -32,7 +32,7 @@ interface ApiService {
     suspend fun getCustomers(): List<Customer>
 
     @GET("customers/{customerId}")
-    suspend fun getCustomerById(@Path("customerId") customerId: Long): Customer
+    suspend fun getCustomerById(@Path("customerId") customerId: Long): Response<Customer>
 
     @POST("customers")
     suspend fun createCustomer(@Body customer: Customer): Response<Customer>

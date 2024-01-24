@@ -21,6 +21,8 @@ import com.iko.android.courier.UserManager
 import com.iko.android.courier.api.RetrofitInstance
 import com.iko.android.courier.data.model.Courier
 import com.iko.android.courier.data.model.Customer
+import com.iko.android.courier.databases.AppDatabase
+import com.iko.android.courier.databases.entities.User
 import com.iko.android.courier.ui.auth.login.LoginActivity
 import com.iko.android.courier.ui.cargo.awaitingCourier.CourierCargoListActivity
 import com.iko.android.courier.ui.cargo.create.CreateCargoActivity
@@ -28,19 +30,20 @@ import com.iko.android.courier.ui.cargo.delivers.DeliversCargoListFragment
 import com.iko.android.courier.ui.cargo.ownCargo.OwnCargoListFragment
 import com.iko.android.courier.ui.profile.ProfileFragment
 import com.iko.android.courier.ui.terms.TermsActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.IllegalFormatException
-
+import java.util.Optional
 
 class MainActivity : AppCompatActivity() {
 
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // R.layout.activity_main
-//
-//        // Inflate the menu items
-//        bottomNavigationView.inflateMenu(R.menu.main_bottom_nav)
+
+        window.navigationBarColor = resources.getColor(R.color.colorNavigationBar)
+        window.statusBarColor = resources.getColor(R.color.colorHomeBar)
 
         var selectedAction = intent.getStringExtra("selectedAction")
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -74,18 +77,56 @@ class MainActivity : AppCompatActivity() {
                 } // Default action
             }
         } else {
-            // Handle the case when selectedAction is null
-            replaceFragment(HomeFragment()) // Default action
+            // If selectedAction is null, fetch user from the SQLite database asynchronously
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    val userDao = AppDatabase.getDatabase(applicationContext).userDao()
+                    val user = userDao.getAllUsers().firstOrNull()
+
+                    if (user != null) {
+                        Log.d("MainActivity", "User found in the database: $user")
+                        // Assign user data to UserManager variables
+                        UserManager.id = user.userId
+                        UserManager.firstname = user.firstname
+                        UserManager.lastname = user.lastname
+                        UserManager.username = user.username
+                        UserManager.email = user.email
+                        UserManager.password = user.password
+                        UserManager.fin = user.fin
+                        UserManager.serialNo = user.serialNo
+                        UserManager.age = user.age
+                        UserManager.gender = user.gender
+                        UserManager.phone = user.phone
+                        UserManager.address = user.address
+                        UserManager.isCourier = user.isCourier
+                        UserManager.ordersNumber = user.ordersNumber
+                        UserManager.expenses = user.expenses
+
+                        UserManager.accessToken = user.accessToken
+                        UserManager.refreshToken = user.refreshToken
+                        // ... (assign other variables)
+
+                        // You may need to update other parts of your UI or logic based on the user data
+                    } else {
+                        // Handle the case when no user is found in the database
+                        // You may want to show a message or perform other actions
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(applicationContext, "No user found in the database", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                // Default action
+                replaceFragment(HomeFragment())
+            }
         }
 
 
-        window.navigationBarColor = resources.getColor(R.color.colorNavigationBar)
-        window.statusBarColor = resources.getColor(R.color.colorHomeBar)
 
-
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+    bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             bottomNavigationClicked(item)
         }
+
+
 
     }
 
@@ -124,7 +165,6 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-
     fun sendPackageClicked(view: View) {
         val intent = Intent(this, CreateCargoActivity::class.java)
         startActivity(intent)
@@ -155,6 +195,9 @@ class MainActivity : AppCompatActivity() {
         editor.clear()
         editor.apply()
 
+        // Clear the database
+        AppDatabase.clearDatabase(applicationContext)
+
         // Reset UserManager variables
         UserManager.id = null
 
@@ -177,6 +220,8 @@ class MainActivity : AppCompatActivity() {
         UserManager.rating = null
         UserManager.deliveriesPackages = null
         UserManager.reviews = null
+        UserManager.accessToken = null
+        UserManager.refreshToken = null
         // Reset UserManager variables
 
         Toast.makeText(applicationContext, "Sign Out Clicked", Toast.LENGTH_SHORT).show()

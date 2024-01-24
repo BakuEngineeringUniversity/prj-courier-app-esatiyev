@@ -28,7 +28,7 @@ object UserManager {
     var expenses: Float? = null
     var isCourier: Boolean? = false
     var deliversNumber: Int? = null
-    var rating: Int? = null
+    var rating: Float? = null
     var deliveriesPackages: MutableList<Package>? = mutableListOf()
     var reviews: MutableList<Review>? = mutableListOf()
 }
