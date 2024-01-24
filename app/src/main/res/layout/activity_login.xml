@@ -69,21 +69,21 @@
             android:drawablePadding="@dimen/small_padding" />
 
 
-<!--        <EditText
-            android:id="@+id/input_password"
-            android:inputType="textPassword"
-            style="@style/RoundedTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/normal_padding"
-            android:layout_marginRight="@dimen/normal_padding"
-            android:layout_marginTop="@dimen/small_padding"
-            android:layout_marginBottom="@dimen/small_padding"
-            android:hint="@string/label_password"
-            android:drawableStart="@drawable/ic_vpn_key_black_24dp"
-            android:drawableEnd="@drawable/visibility_off_24"
-            android:drawableTint="@color/colorText1"
-            android:drawablePadding="@dimen/small_padding" />-->
+        <!--        <EditText
+                    android:id="@+id/input_password"
+                    android:inputType="textPassword"
+                    style="@style/RoundedTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/normal_padding"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:layout_marginBottom="@dimen/small_padding"
+                    android:hint="@string/label_password"
+                    android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+                    android:drawableEnd="@drawable/visibility_off_24"
+                    android:drawableTint="@color/colorText1"
+                    android:drawablePadding="@dimen/small_padding" />-->
 
         <RelativeLayout
             android:id="@+id/rl_password"
@@ -92,14 +92,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/normal_padding"
             android:layout_marginRight="@dimen/normal_padding"
-            android:layout_marginTop="@dimen/small_padding"
             android:layout_marginBottom="@dimen/small_padding"
+            android:layout_marginTop="@dimen/small_padding"
             >
 
             <EditText
                 android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/small_padding"
                 android:inputType="textPassword"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/img_password"

@@ -40,10 +40,12 @@ data class Courier(
     @SerializedName("address")
     @Expose
     val address: String? = null,
-    @SerializedName("deliveriesPackages")
-    @Expose
-    val deliveriesPackages: MutableList<Package>? = mutableListOf(),
-    @SerializedName("reviews")
-    @Expose
-    val reviews: MutableList<Review>? = mutableListOf()
+    // ignore
+//    @SerializedName("deliveriesPackages")
+//    @Expose
+//    val deliveriesPackages: MutableList<Package>? = mutableListOf(),
+    // ignore
+//    @SerializedName("reviews")
+//    @Expose
+//    val reviews: MutableList<Review>? = mutableListOf()
 )

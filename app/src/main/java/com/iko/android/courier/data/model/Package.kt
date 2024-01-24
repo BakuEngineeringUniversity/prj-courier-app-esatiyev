@@ -24,9 +24,21 @@ data class Package(
     @SerializedName("deliveryMethod")
     @Expose
     val deliveryMethod: String? = null,
+    @SerializedName("deliverLatitude")
+    @Expose
+    var deliverLatitude: Double? = null,
+    @SerializedName("deliverLongitude")
+    @Expose
+    var deliverLongitude: Double? = null,
     @SerializedName("deliverAddress")
     @Expose
     val deliverAddress: String? = null,
+    @SerializedName("pickUpLatitude")
+    @Expose
+    var pickUpLatitude: Double? = null,
+    @SerializedName("pickUpLongitude")
+    @Expose
+    var pickUpLongitude: Double? = null,
     @SerializedName("pickUpAddress")
     @Expose
     val pickUpAddress: String? = null,
@@ -48,6 +60,15 @@ data class Package(
     @SerializedName("senderEmail")
     @Expose
     val senderEmail: String? = null,
+    @SerializedName("courierFullName")
+    @Expose
+    val courierFullName: String? = null,
+    @SerializedName("courierPhone")
+    @Expose
+    val courierPhone: String? = null,
+    @SerializedName("courierEmail")
+    @Expose
+    val courierEmail: String? = null,
     @SerializedName("deliveryNote")
     @Expose
     val deliveryNote: String? = null,
@@ -57,23 +78,10 @@ data class Package(
     @SerializedName("deliveryHistory")
     @Expose
     val deliveryHistory: MutableList<DeliveryHistory>? = mutableListOf(),
-    @SerializedName("customer")
-    val customer: Customer? = null,
-    @SerializedName("courier")
-    val courier: Courier? = null
-) {
-    fun updatePackageStatus(newStatus: DeliveryStatus) {
-        deliveryStatus = newStatus
-        deliveryHistory?.add(DeliveryHistory(newStatus, formatDateTime(LocalDateTime.now()), this))
-    }
-
-    fun formatDateTime(dateTime: LocalDateTime): String {
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-        val dateFormatter = DateTimeFormatter.ofPattern("dd.mm.YYYY")
-
-        val timeString = dateTime.format(timeFormatter)
-        val dateString = dateTime.format(dateFormatter)
-
-        return "$timeString\n$dateString"
-    }
-}
+//    // ignore
+//    @SerializedName("customer")
+//    val customer: Customer? = null,
+//    // ignore
+//    @SerializedName("courier")
+//    val courier: Courier? = null
+)

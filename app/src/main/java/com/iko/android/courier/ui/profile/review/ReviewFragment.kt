@@ -31,11 +31,7 @@ class ReviewFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val reviews = apiService.getReviewsByCourierId(UserManager.id!!)
-//                if (reviews.isEmpty()) {
-//                    // yazilsin ki, review list empty
-//                    //rootView =
-//                }
-//                else
+
                 showReviews(reviews)
             } catch (e: NoSuchElementException) {
                 // basqa bir layout duzelt ve o layout gorsensin ve yazilsin ki, become courier
@@ -73,13 +69,6 @@ class ReviewFragment : Fragment() {
         }
 
         val emptyLayout = layoutInflater.inflate(R.layout.empty_layout, null)
-
-//        val myLinearLayout = emptyLayout.findViewById<LinearLayout>(R.id.empty_linear_layout)
-//
-//        val newHeight = 10 // Change this to your desired height in pixels or dp
-//        val layoutParams = myLinearLayout.layoutParams
-//        layoutParams.height = newHeight
-//        myLinearLayout.layoutParams = layoutParams
 
         reviewsLayout.addView(emptyLayout)
     }

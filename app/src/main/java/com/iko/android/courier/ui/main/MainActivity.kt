@@ -1,6 +1,7 @@
 package com.iko.android.courier.ui.main
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment).commit()
@@ -147,6 +149,36 @@ class MainActivity : AppCompatActivity() {
 
 
     fun signOutClicked(item: MenuItem) {
+        // Clear user session data
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        // Reset UserManager variables
+        UserManager.id = null
+
+        UserManager.firstname = null
+        UserManager.lastname = null
+        UserManager.username = null
+        UserManager.email = null
+        UserManager.password = null
+        UserManager.fin = null
+        UserManager.serialNo = null
+        UserManager.age = null
+        UserManager.gender = null
+        UserManager.phone = null
+        UserManager.address = null
+        UserManager.packages = null
+        UserManager.ordersNumber = null
+        UserManager.expenses = null
+        UserManager.isCourier = false
+        UserManager.deliversNumber = null
+        UserManager.rating = null
+        UserManager.deliveriesPackages = null
+        UserManager.reviews = null
+        // Reset UserManager variables
+
         Toast.makeText(applicationContext, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
         val intent = Intent(applicationContext, LoginActivity::class.java)
         startActivity(intent)

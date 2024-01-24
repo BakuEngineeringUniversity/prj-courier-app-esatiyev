@@ -1,17 +1,17 @@
 package com.iko.android.courier.api
 
-//import org.springframework.http.ResponseEntity
 import com.iko.android.courier.data.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
 
-    @POST("login")
-    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+//    @POST("login")
+//    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-
-    // Courier Endpoints
+    @POST("auth")
+    suspend fun authenticate(@Body authRequest: AuthenticationRequest): Response<AuthenticationResponse>
+        // Courier Endpoints
     @GET("couriers")
     suspend fun getCouriers(): List<Courier>
 
@@ -81,8 +81,8 @@ interface ApiService {
     @GET("reviews/couriers/{courierId}")
     suspend fun getReviewsByCourierId(@Path("courierId") courierId: Long): List<Review>
 
-    @POST("reviews/couriers/{courierId}")
-    suspend fun addReview(@Path("courierId") courierId: Long, @Body review: Review): Review
+    @POST("reviews/couriers/{courierEmail}")
+    suspend fun addReview(@Path("courierEmail") courierEmail: String, @Body review: Review): Review
 
     @DELETE("reviews/couriers/{courierId}")
     suspend fun deleteReviewByCourierId(@Path("courierId") courierId: Long)

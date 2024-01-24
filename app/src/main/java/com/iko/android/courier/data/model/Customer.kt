@@ -40,9 +40,10 @@ data class Customer(
     @SerializedName("address")
     @Expose
     val address: String? = null,
-    @SerializedName("packages")
-    @Expose
-    val packages: MutableList<Package>? = mutableListOf(),
+    // ignore
+//    @SerializedName("packages")
+//    @Expose
+//    val packages: MutableList<Package>? = mutableListOf(),
     @SerializedName("ordersNumber")
     @Expose
     val ordersNumber: Int = 0,

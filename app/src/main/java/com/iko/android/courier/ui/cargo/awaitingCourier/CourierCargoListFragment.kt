@@ -1,5 +1,7 @@
 package com.iko.android.courier.ui.cargo.awaitingCourier
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,11 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isNotEmpty
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.maps.model.LatLng
 import com.iko.android.courier.R
 import com.iko.android.courier.UserManager
 import com.iko.android.courier.api.RetrofitInstance
+import com.iko.android.courier.data.model.DeliveryStatus
 import com.iko.android.courier.data.model.Package
 import kotlinx.coroutines.launch
+import java.util.IllegalFormatException
 
 
 class CourierCargoListFragment : Fragment() {
@@ -62,7 +67,7 @@ class CourierCargoListFragment : Fragment() {
 
         for (cargo in cargoes) {
             // if package is created by current user, skip it
-            if (cargo.customer!!.id == UserManager.id || cargo.courier != null)
+            if (cargo.senderEmail == UserManager.email || cargo.courierEmail != null)
                 continue
 
             val cargoView = layoutInflater.inflate(R.layout.item_cargo, null)
@@ -121,11 +126,25 @@ class CourierCargoListFragment : Fragment() {
 
             // accept Order
             val btnAcceptOrder = cargoView.findViewById<TextView>(R.id.btn_accept_order)
-
             btnAcceptOrder.setOnClickListener() {
                 val packageId = cargoView.tag as? String ?: ""
                 acceptOrder(cargo.id!!);
             }
+
+            val btnShowRouteOnMap = cargoView.findViewById<TextView>(R.id.btn_show_route)
+            btnShowRouteOnMap.setOnClickListener() {
+                if (cargo.deliverLatitude == null || cargo.deliverLongitude == null ||
+                    cargo.pickUpLatitude == null || cargo.pickUpLongitude == null) {
+                        Toast.makeText(requireContext(), "Route can't be shown", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                } else {
+                    val pickupLatLng = LatLng(cargo.pickUpLatitude!!, cargo.pickUpLongitude!!)
+                    val deliveryLatLng = LatLng(cargo.deliverLatitude!!, cargo.deliverLongitude!!)
+                    showRouteOnGoogleMaps(pickupLatLng, deliveryLatLng)
+                }
+            }
+
+
             cargoesLayout.addView(cargoView)
         }
 
@@ -141,6 +160,26 @@ class CourierCargoListFragment : Fragment() {
         cargoesLayout.addView(emptyLayout)
     }
 
+    fun showRouteOnGoogleMaps(pickup: LatLng, delivery: LatLng) {
+        val uri = "https://www.google.com/maps/dir/?api=1" +
+                "&origin=${pickup.latitude},${pickup.longitude}" +
+                "&destination=${delivery.latitude},${delivery.longitude}" +
+                "&travelmode=driving"  // You can change the travel mode as needed
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        intent.setPackage("com.google.android.apps.maps")
+
+        // Check if the Google Maps app is installed
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+        } else {
+            // If Google Maps app is not installed, open in a web browser
+            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(webIntent)
+        }
+    }
+
+
     private fun acceptOrder(packageId: Long) {
         val apiService = RetrofitInstance.apiService
 
@@ -155,6 +194,8 @@ class CourierCargoListFragment : Fragment() {
                     }
 
                     fetchPackages()
+
+                    updatePackageState(packageId)
                 } else {
                     // Operation failed, handle accordingly
                     Toast.makeText(requireContext(), "Error: ${response.code()}", Toast.LENGTH_SHORT).show()
@@ -164,7 +205,31 @@ class CourierCargoListFragment : Fragment() {
                 Log.e("Accept Order", "Error accepting order: ${e.message}")
             }
         }
+
+
     }
+
+    fun updatePackageState(packageId: Long) {
+        val apiService = RetrofitInstance.apiService
+
+        val updatedPackage = Package(deliveryStatus = DeliveryStatus.COURIER_ON_THE_WAY)
+
+        lifecycleScope.launch {
+            try {
+                val response = apiService.updatePackage(packageId, updatedPackage)
+
+                Toast.makeText(requireContext(), "Package updated successfully with id = ${response.id}." +
+                        "\nCurrent state is '${response.deliveryStatus}'", Toast.LENGTH_SHORT).show()
+
+            } catch (e : IllegalFormatException) {
+                Log.e("Update Package Step", "IllegalFormatException: ${e.message}")
+            }
+            catch (e: Exception) {
+                Log.e("Update Package Step", "Error fetching packages: ${e.message}")
+            }
+        }
+    }
+
 
     private fun toggleCargoDetailVisibility(cargoView: View) {
         val detailLayout = cargoView.findViewById<View>(R.id.detail)

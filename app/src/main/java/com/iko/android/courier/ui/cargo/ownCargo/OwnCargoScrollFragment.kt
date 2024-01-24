@@ -57,7 +57,7 @@ class OwnCargoScrollFragment : Fragment() {
 
             Log.d("CargoFragment", "Packages: ${packages.size}")
             packages.forEach { packet ->
-                Log.d("CargoFragment", "Package: ${packet.id}, ${packet.deliveryMethod}, ${packet.createdDate}, ${packet.pickUpAddress}, ${packet.deliverAddress}, ${packet.weight}, ${packet.price}, ${packet.customer}")
+                Log.d("CargoFragment", "Package: ${packet.id}, ${packet.deliveryMethod}, ${packet.createdDate}, ${packet.pickUpAddress}, ${packet.deliverAddress}, ${packet.weight}, ${packet.price}, ${packet.senderEmail}")
             }
             // Fetch or generate review data (e.g., from an API or a local data source)
             showPackages(packages)

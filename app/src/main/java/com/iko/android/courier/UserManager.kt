@@ -9,6 +9,8 @@ object UserManager {
         return "$firstname $lastname"
     }
 
+    var accessToken: String? = null
+    var refreshToken: String? = null
     var id: Long? = null
     var firstname: String? = null
     var lastname: String? = null
@@ -22,11 +24,11 @@ object UserManager {
     var phone: String? = null
     var address: String? = null
     var packages: MutableList<Package>? = mutableListOf()
-    var ordersNumber: Int = 0
-    var expenses: Float = 0f
+    var ordersNumber: Int? = null
+    var expenses: Float? = null
     var isCourier: Boolean? = false
-    var deliversNumber: Int = 0
-    var rating: Int = 0
+    var deliversNumber: Int? = null
+    var rating: Int? = null
     var deliveriesPackages: MutableList<Package>? = mutableListOf()
     var reviews: MutableList<Review>? = mutableListOf()
 }

@@ -31,8 +31,8 @@ class DeliversCargoListFragment : Fragment() {
             deliversListTitle.visibility = View.VISIBLE
             val title = rootView.findViewById<TextView>(R.id.title_delivers)
             val subtitle = rootView.findViewById<TextView>(R.id.subtitle_delivers)
-            title.text = "YOu are Not CooRier"
-            subtitle.text = "Please Bevcome courier"
+            title.text = "You are not Courier"
+            subtitle.text = "Become courier, enjoy delivering and earn money!"
             return rootView
         }
         val rootView = inflater.inflate(R.layout.fragment_delivers_cargo_list, container, false)
@@ -55,7 +55,6 @@ class DeliversCargoListFragment : Fragment() {
         })
 
         return rootView
-
     }
 
 

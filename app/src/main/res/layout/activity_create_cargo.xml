@@ -58,6 +58,35 @@
                 android:gravity="center"
                 android:orientation="vertical" >
 
+                <!-- &lt;!&ndash; map &ndash;&gt;
+                 <FrameLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+                     <fragment
+                         android:id="@+id/mapFragment"
+                         android:name="com.google.android.gms.maps.SupportMapFragment"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:visibility="gone" />
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical">
+
+                         &lt;!&ndash; Your existing layout code for pick-up, delivery, and receiver information &ndash;&gt;
+
+                         <Button
+                             android:id="@+id/btnSelectLocation"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Select Location on Map"
+                             android:layout_gravity="center"
+                             android:onClick="openMapActivity" />
+                     </LinearLayout>
+                 </FrameLayout>
+ -->
                 <!-- pickup section -->
                 <LinearLayout
                     android:id="@+id/pick_up_address_layout"
@@ -87,34 +116,44 @@
                             android:layout_gravity="left"
                             android:layout_marginStart="15sp"
                             app:tint="@color/colorHomeBar" />
+
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/medium_padding"
                             android:text="Pick up Address"
                             android:textColor="@color/colorHomeBar"
-                            android:textSize="@dimen/large_text"
-                            android:layout_marginStart="@dimen/medium_padding"
-                            />
+                            android:textSize="@dimen/large_text" />
+
+                        <Button
+                            android:id="@+id/btnSelectPickUpLocation"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/google_maps_2"
+                            android:onClick="openMapActivity"
+                            android:textSize="16sp" />
 
 
                     </LinearLayout>
-                    <EditText
+                    <TextView
                         android:id="@+id/pickUpEditTxt"
                         android:layout_width="match_parent"
-                        android:layout_height="70sp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="70sp"
                         android:layout_marginStart="20sp"
                         android:layout_marginEnd="20sp"
                         android:layout_marginTop="15sp"
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/bottom_border_edit_text"
                         android:ems="10"
-                        android:inputType="text"
                         android:gravity="top"
                         android:layout_gravity="center"
                         android:text=""
-                        android:textSize="@dimen/medium_text"
-                        android:hint="Pick Up Address"
+                        android:textSize="@dimen/large_text"
                         android:textColorHint="@color/colorText1"/>
+
 
                 </LinearLayout>
 
@@ -145,31 +184,39 @@
                             android:layout_marginStart="15sp"
                             app:tint="@color/colorHomeBar" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Delivery Address"
                             android:textColor="@color/colorHomeBar"
                             android:textSize="@dimen/large_text"
                             android:layout_marginStart="@dimen/medium_padding" />
 
+                        <Button
+                            android:id="@+id/btnSelectDeliveryLocation"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/google_maps_2"
+                            android:onClick="openMapActivity"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
-                    <EditText
+                    <TextView
                         android:id="@+id/deliveryEditTxt"
                         android:layout_width="match_parent"
-                        android:layout_height="70sp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="70sp"
                         android:layout_marginStart="20sp"
                         android:layout_marginEnd="20sp"
                         android:layout_marginTop="15sp"
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/bottom_border_edit_text"
                         android:ems="10"
-                        android:inputType="text"
                         android:gravity="top"
                         android:layout_gravity="center"
                         android:text=""
-                        android:textSize="@dimen/medium_text"
-                        android:hint="Delivery Address"
+                        android:textSize="@dimen/large_text"
                         android:textColorHint="@color/colorText1"/>
 
                 </LinearLayout>
@@ -220,7 +267,7 @@
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/bottom_border_edit_text"
                         android:ems="10"
-                        android:inputType="text"
+                        android:inputType="textPersonName"
                         android:layout_gravity="center"
                         android:text=""
                         android:textSize="@dimen/medium_text"
@@ -239,7 +286,7 @@
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/bottom_border_edit_text"
                         android:ems="10"
-                        android:inputType="text"
+                        android:inputType="phone"
                         android:layout_gravity="center"
                         android:text=""
                         android:textSize="@dimen/medium_text"
@@ -258,7 +305,7 @@
                         android:layout_marginBottom="10sp"
                         android:background="@drawable/bottom_border_edit_text"
                         android:ems="10"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:layout_gravity="center"
                         android:text=""
                         android:textSize="@dimen/medium_text"
@@ -325,7 +372,7 @@
                             android:layout_marginEnd="20sp"
                             android:background="@drawable/bottom_border_edit_text"
                             android:ems="10"
-                            android:inputType="text"
+                            android:inputType="numberDecimal"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text=""
@@ -344,7 +391,7 @@
                             android:layout_marginEnd="20sp"
                             android:background="@drawable/bottom_border_edit_text"
                             android:ems="10"
-                            android:inputType="text"
+                            android:inputType="numberDecimal"
                             android:layout_gravity="center"
                             android:text=""
                             android:textSize="@dimen/medium_text"
@@ -482,7 +529,7 @@
                         android:textColorHint="@color/colorText1"/>
 
                 </LinearLayout>
-                
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100sp"

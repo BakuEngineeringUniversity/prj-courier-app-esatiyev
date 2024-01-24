@@ -43,7 +43,7 @@ class CargoStateFragment : Fragment() {
     private lateinit var writeReviewButton: Button
     private lateinit var callBtn: Button
 
-    private lateinit var courierId: String
+    private lateinit var courierEmail: String
 
 
     override fun onCreateView(
@@ -69,8 +69,8 @@ class CargoStateFragment : Fragment() {
             try {
                 val packageDetails = apiService.getPackageById(packageId!!.toLong())
 
-                courierPhone = packageDetails.courier?.phone
-                courierId = packageDetails.courier?.id.toString()
+                courierPhone = packageDetails.courierPhone
+                courierEmail = packageDetails.courierEmail.toString()
 
                 updateUI(packageDetails)
             } catch (e: Exception) {
@@ -221,7 +221,7 @@ class CargoStateFragment : Fragment() {
                     )
 
 
-                    val response = apiService.addReview(courierId.toLong(), review)
+                    val response = apiService.addReview(courierEmail, review)
 
                     Toast.makeText(requireContext(), "Review submitted successfully. " +
                             "Thank you!", Toast.LENGTH_SHORT).show()

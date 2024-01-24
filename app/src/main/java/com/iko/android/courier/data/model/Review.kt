@@ -19,7 +19,8 @@ data class Review(
     @SerializedName("reviewerFullName")
     @Expose
     val reviewerFullName: String? = null,
-    @SerializedName("courier")
-    @Expose
-    val courier: Courier? = null
+    // ignore
+//    @SerializedName("courier")
+//    @Expose
+//    val courier: Courier? = null
 )
