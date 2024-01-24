@@ -5,7 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock.sleep
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,9 +17,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.iko.android.courier.R
 import com.iko.android.courier.UserManager
 import com.iko.android.courier.api.RetrofitInstance
+import com.iko.android.courier.databases.AppDatabase
+import com.iko.android.courier.databases.entities.User
 import com.iko.android.courier.ui.auth.signup.RegisterActivity
 import com.iko.android.courier.ui.main.MainActivity
 import com.iko.android.courier.viewmodel.LoginViewModel
@@ -25,6 +30,7 @@ import com.iko.android.courier.viewmodel.factory.LoginViewModelFactory
 import com.nimbusds.jwt.JWT
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.JWTParser
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -54,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         if (isLoggedIn()) {
             // User is already logged in, navigate to the main activity
             fetchAndSetupUserInfo()
-
+            sleep(1000)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
@@ -69,6 +75,15 @@ class LoginActivity : AppCompatActivity() {
         val sharedEmail = sharedPreferences.getString("EMAIL", "")
         val sharedPassword = sharedPreferences.getString("PASSWORD", "")
         return sharedEmail?.isNotEmpty() == true && sharedPassword?.isNotEmpty() == true
+    }
+
+    private fun fetchAndSetupUserInfo() {
+        val id = sharedPreferences.getLong("ID", 0L)
+
+        if (id != 0L) {
+            // Call the function in your ViewModel to fetch user info based on email and password
+            viewModel.fetchUserInfo(id)
+        }
     }
 
     private fun setupLoginLogic() {
@@ -106,17 +121,56 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("PASSWORD", passwordEditText.text.toString())
         UserManager.id = extractSubjectFromJwt(UserManager.accessToken)
         editor.putLong("ID", UserManager.id?:0L)
+
+        val apiService = RetrofitInstance.apiService
+
+
+        lifecycleScope.launch {
+            try {
+                val customerResponse = apiService.getCustomerById(UserManager.id!!)
+                if (customerResponse.isSuccessful && customerResponse.body() != null) {
+                    val customer = customerResponse.body() ?:
+                        throw NoSuchElementException("Customer not found")
+
+                    val userDao = AppDatabase.getDatabase(applicationContext).userDao()
+
+                    userDao.insertUser(
+                        User(
+                            userId = customer.id,
+                            firstname = customer.firstname,
+                            lastname = customer.lastname,
+                            username = customer.username,
+                            email = customer.email,
+                            password = customer.password,
+                            fin = customer.fin,
+                            serialNo = customer.serialNo,
+                            age = customer.age,
+                            gender = customer.gender,
+                            phone = customer.phone,
+                            address = customer.address,
+                            ordersNumber = customer.ordersNumber,
+                            expenses = customer.expenses,
+                            isCourier = customer.isCourier,
+                            deliversNumber = 0,
+                            rating = null,
+                            accessToken = UserManager.accessToken,
+                            refreshToken = UserManager.refreshToken
+                        )
+                    )
+                }
+            } catch (e: NoSuchElementException) {
+                // basqa bir layout duzelt ve o layout gorsensin ve yazilsin ki, become courier
+                // rootView =
+                Log.e("LoginActivity", "No such customer: ${e.message}")
+            }
+            catch (e: Exception) {
+                Log.e("LoginActivity", "Error fetching customer: ${e.message}")
+            }
+        }
         editor.apply()
     }
 
-    private fun fetchAndSetupUserInfo() {
-        val id = sharedPreferences.getLong("ID", 0L)
 
-        if (id != 0L) {
-            // Call the function in your ViewModel to fetch user info based on email and password
-            viewModel.fetchUserInfo(id)
-        }
-    }
 
     fun onRegisterOptionClick(view: View) {
         val intent = Intent(this, RegisterActivity::class.java)

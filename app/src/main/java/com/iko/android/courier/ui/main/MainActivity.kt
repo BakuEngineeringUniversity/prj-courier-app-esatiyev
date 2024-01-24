@@ -115,9 +115,10 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-                // Default action
-                replaceFragment(HomeFragment())
             }
+
+            // Default action
+            replaceFragment(HomeFragment())
         }
 
 

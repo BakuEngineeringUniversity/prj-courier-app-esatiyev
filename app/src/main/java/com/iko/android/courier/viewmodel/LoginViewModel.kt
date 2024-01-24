@@ -48,14 +48,16 @@ class LoginViewModel(private val apiService: ApiService,
                     _loginResult.value = (authenticationResponse != null) && (authenticationResponse.accessToken != null)
 
                     if (_loginResult.value == true) {
-                        UserManager.id = extractSubjectFromJwt(authenticationResponse?.accessToken)
+//                        UserManager.id = extractSubjectFromJwt(authenticationResponse?.accessToken)
 
-                        val customerResponse = apiService.getCustomerById(UserManager.id!!)
-                        Log.d("LoginViewModel Customer Response", "Customer: $customerResponse")
+//                        val customerResponse = apiService.getCustomerById(UserManager.id!!)
+//                        Log.d("LoginViewModel Customer Response", "Customer: $customerResponse")
                         Log.d("Access token: ", UserManager.accessToken?:"")
                         Log.d("Refresh token: ", UserManager.refreshToken?:"")
+ /*
                         if(customerResponse.isSuccessful && customerResponse.body() != null) {
                             val customer: Customer = customerResponse.body()!!
+
 
                             userDao.deleteAllUsers()
                             // Save user data to the database
@@ -79,6 +81,7 @@ class LoginViewModel(private val apiService: ApiService,
                                 UserManager.refreshToken
                             )
 
+
 //
 //                            UserManager.firstname = customer.firstname
 //                            UserManager.lastname = customer.lastname
@@ -95,7 +98,7 @@ class LoginViewModel(private val apiService: ApiService,
 //                            UserManager.expenses = customer.expenses
 //                            UserManager.isCourier = customer.isCourier
 
-                        }
+                        //} */
                     }
 
                 } else {
@@ -108,20 +111,41 @@ class LoginViewModel(private val apiService: ApiService,
         }
     }
 
-    private suspend fun saveUserToDatabase(id: Long, firstname: String?, lastname: String?, username: String?,
-                        email: String?, password: String?, fin: String?, serialNo: String?, age: Int?,
-                        gender: String?, phone: String?, address: String?, ordersNumber: Int?, expenses: Float?,
-                        isCourier: Boolean?, accessToken: String?, refreshToken: String?) {
-        userDao.insertUser(User(userId = id, firstname =  firstname, lastname =  lastname, username =  username,
-            email =  email, password =  password, fin = fin, serialNo = serialNo, age = age, gender = gender,
-            phone = phone, address = address, ordersNumber = ordersNumber, expenses = expenses, isCourier = isCourier,
-            deliversNumber = 0, rating = null, accessToken = accessToken, refreshToken = refreshToken))
+ /*   private suspend fun saveUserToDatabase(
+        id: Long, firstname: String?, lastname: String?, username: String?,
+        email: String?, password: String?, fin: String?, serialNo: String?, age: Int?,
+        gender: String?, phone: String?, address: String?, ordersNumber: Int?, expenses: Float?,
+        isCourier: Boolean?, accessToken: String?, refreshToken: String?
+    ) {
+        userDao.insertUser(
+            User(
+                userId = id,
+                firstname = firstname,
+                lastname = lastname,
+                username = username,
+                email = email,
+                password = password,
+                fin = fin,
+                serialNo = serialNo,
+                age = age,
+                gender = gender,
+                phone = phone,
+                address = address,
+                ordersNumber = ordersNumber,
+                expenses = expenses,
+                isCourier = isCourier,
+                deliversNumber = 0,
+                rating = null,
+                accessToken = accessToken,
+                refreshToken = refreshToken
+            )
+        )
 
 //        val user = userDao.getFirstUser()
 //        if(user.isPresent) {
 //
 //        }
-    }
+    }*/
 
     fun fetchUserInfo(id: Long): Boolean {
         var success = true
