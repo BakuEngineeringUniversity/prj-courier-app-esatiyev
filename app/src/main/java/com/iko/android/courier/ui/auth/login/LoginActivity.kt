@@ -3,7 +3,7 @@ package com.iko.android.courier.ui.auth.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.SystemClock.sleep
 import android.text.method.PasswordTransformationMethod
@@ -12,7 +12,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
@@ -30,7 +32,10 @@ import com.iko.android.courier.viewmodel.factory.LoginViewModelFactory
 import com.nimbusds.jwt.JWT
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.JWTParser
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -49,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         window.statusBarColor = resources.getColor(R.color.colorPrimary)
         window.navigationBarColor = resources.getColor(R.color.md_white_1000)
+
 
         viewModel = ViewModelProvider(this, LoginViewModelFactory(RetrofitInstance.apiService, applicationContext))[LoginViewModel::class.java]
 
@@ -87,11 +93,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupLoginLogic() {
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                progressBar.visibility = View.VISIBLE
                 viewModel.loginUser(email, password)
             } else {
                 // Handle empty email or password
@@ -105,10 +113,25 @@ class LoginActivity : AppCompatActivity() {
                 // Set the user as logged in after UserManager.id is correctly set
                 setLoggedIn()
 
+//                GlobalScope.launch {
+//                    // Your code before the delay
+//
+//                    // Introduce a delay of 1 seconds (1000 milliseconds)
+//                    delay(2000)
+//
+//                    // Your code after the delay
+//                    progressBar.visibility = View.GONE
+//                }
+                sleep(1000)
+
+                progressBar.visibility = View.GONE
+                Log.d("LoginActivity", "Login successful")
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+
             } else {
                 // Login failed, show a toast
+                progressBar.visibility = View.GONE
                 Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
             }
         })
@@ -121,6 +144,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("PASSWORD", passwordEditText.text.toString())
         UserManager.id = extractSubjectFromJwt(UserManager.accessToken)
         editor.putLong("ID", UserManager.id?:0L)
+        editor.apply()
 
         val apiService = RetrofitInstance.apiService
 
@@ -133,7 +157,7 @@ class LoginActivity : AppCompatActivity() {
                         throw NoSuchElementException("Customer not found")
 
                     val userDao = AppDatabase.getDatabase(applicationContext).userDao()
-
+                    Log.d("LoginActivity", "Customer: $customer")
                     userDao.insertUser(
                         User(
                             userId = customer.id,
@@ -157,6 +181,7 @@ class LoginActivity : AppCompatActivity() {
                             refreshToken = UserManager.refreshToken
                         )
                     )
+                    Log.d("LoginActivity", "User inserted successfully")
                 }
             } catch (e: NoSuchElementException) {
                 // basqa bir layout duzelt ve o layout gorsensin ve yazilsin ki, become courier
@@ -167,7 +192,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("LoginActivity", "Error fetching customer: ${e.message}")
             }
         }
-        editor.apply()
     }
 
 
