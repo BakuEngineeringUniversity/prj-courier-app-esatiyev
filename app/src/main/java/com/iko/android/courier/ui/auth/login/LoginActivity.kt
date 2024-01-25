@@ -143,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("EMAIL", emailEditText.text.toString())
         editor.putString("PASSWORD", passwordEditText.text.toString())
         UserManager.id = extractSubjectFromJwt(UserManager.accessToken)
-        editor.putLong("ID", UserManager.id?:0L)
+        editor.putLong("ID", UserManager.id ?: 0L)
         editor.apply()
 
         val apiService = RetrofitInstance.apiService

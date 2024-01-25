@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +37,8 @@ class DeliversCargoListFragment : Fragment() {
             return rootView
         }
         val rootView = inflater.inflate(R.layout.fragment_delivers_cargo_list, container, false)
+        val progressBar = rootView.findViewById<ProgressBar>(R.id.deliver_cargo_progress_bar)
+        progressBar.visibility = View.VISIBLE
 
         val deliversCargoListFragmentContainerView =
             rootView.findViewById<FragmentContainerView>(R.id.DeliversCargoListFragmentContainerView)
@@ -43,6 +46,7 @@ class DeliversCargoListFragment : Fragment() {
         // Check if the package list is empty
         fetchPackages(object : PackageFetchCallback {
             override fun onPackageSizeFetched(size: Int) {
+                progressBar.visibility = View.GONE
                 if (size != 0) {
                     deliversCargoListFragmentContainerView.visibility = View.VISIBLE
                 } else {

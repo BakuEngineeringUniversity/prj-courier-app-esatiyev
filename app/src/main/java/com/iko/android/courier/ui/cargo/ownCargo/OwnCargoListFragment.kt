@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
 import com.iko.android.courier.R
@@ -23,11 +24,13 @@ class OwnCargoListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_own_cargo_list, container, false)
-
+        val progressBar = rootView.findViewById<ProgressBar>(R.id.own_cargo_progress_bar)
+        progressBar.visibility = View.VISIBLE
 
         // Fetch packages and determine whether to show regular or empty layout
         fetchPackages(object : PackageFetchCallback {
             override fun onPackageSizeFetched(size: Int) {
+                progressBar.visibility = View.GONE
                 if (size != 0) {
                     // Packages exist, show regular layout
                     // You can add your logic here to display the packages
