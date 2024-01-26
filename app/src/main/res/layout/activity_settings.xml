@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    tools:context=".ui.settings.SettingsActivity">
+
+    <LinearLayout
+        android:id="@+id/settings_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="10sp"
+            android:clickable="true"
+            android:onClick="backToProfile"
+            android:rotation="90"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:tint="@color/md_white_1000" />
+
+        <TextView
+            android:id="@+id/settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_padding"
+            android:fontFamily="sans-serif-medium"
+            android:text="Settings"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/x_large_text" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:background="@drawable/ic_city_large_black"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/settings_title_layout">
+
+        <!-- Similar to your register design, you can place an image or icon here -->
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="100sp"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/input_firstname_settings"
+                android:inputType="textPersonName"
+                style="@style/RoundedTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:hint="Name"
+                android:drawableStart="@drawable/ic_person_purple_24dp"
+                android:drawableTint="@color/colorText1"
+                android:drawablePadding="@dimen/small_padding" />
+
+            <EditText
+                android:id="@+id/input_surname_settings"
+                android:inputType="textPersonName"
+                style="@style/RoundedTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:hint="Surname"
+                android:drawableStart="@drawable/ic_person_purple_24dp"
+                android:drawableTint="@color/colorText1"
+                android:drawablePadding="@dimen/small_padding" />
+
+
+            <!-- Option to change password -->
+            <RelativeLayout
+                android:id="@+id/rl_password_settings"
+                style="@style/RoundedTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding">
+
+                <EditText
+                    android:id="@+id/input_password_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/img_password_settings"
+                    android:background="#00000000"
+                    android:hint="New Password"
+                    android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+                    android:drawableTint="@color/colorText1"
+                    android:drawablePadding="@dimen/small_padding"
+                    android:ems="10"/>
+
+                <ImageView
+                    android:id="@+id/img_password_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/visibility_off_24"
+                    android:backgroundTint="@color/colorText1"
+                    android:clickable="true"
+                    android:onClick="togglePasswordSettings"/>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/input_email_settings"
+                android:inputType="textEmailAddress"
+                style="@style/RoundedTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:hint="Email"
+                android:drawableStart="@drawable/ic_mail_outline_black_24dp"
+                android:drawableTint="@color/colorText1"
+                android:drawablePadding="@dimen/small_padding" />
+
+
+            <!-- Option to change phone number -->
+            <EditText
+                android:id="@+id/input_phone_settings"
+                android:inputType="phone"
+                style="@style/RoundedTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:hint="Phone Number"
+                android:drawableStart="@drawable/ic_local_phone_black_24dp"
+                android:drawableTint="@color/colorText1"
+                android:drawablePadding="@dimen/small_padding" />
+
+            <!-- Button to save changes -->
+            <Button
+                android:id="@+id/btn_save_changes"
+                style="@style/RoundedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="saveChanges"
+                android:text="Save Changes" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.iko.android.courier.databases.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.iko.android.courier.databases.entities.User
 import java.util.Optional
 
@@ -26,4 +27,7 @@ interface UserDao {
 
     @Insert
     suspend fun insertUser(user: User)
+
+    @Update
+    suspend fun updateUser(user: User)
 }

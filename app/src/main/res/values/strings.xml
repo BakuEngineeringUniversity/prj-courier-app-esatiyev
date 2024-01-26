@@ -96,4 +96,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_register">Signup</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="customer_support_dialog_text">Thank you for reaching out to us! Our online chat support is currently unavailable. However, we\'re here to assist you via phone. Please call our customer support hotline!</string>
 </resources>

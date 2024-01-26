@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/md_white_1000"
+    app:cardCornerRadius="20sp"
+    android:layout_marginHorizontal="0sp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/customer_support_dialog_text"
+            android:textAlignment="center"
+            android:id="@+id/stateMessage"
+            android:textColor="@color/colorText1"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnClose"
+                android:textColor="@color/md_white_1000"
+                android:textSize="14sp"
+                android:text="CLOSE"
+                android:layout_margin="5dp"
+                android:backgroundTint="#A4A4A4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnCall"
+                android:textColor="@color/md_white_1000"
+                android:textSize="14sp"
+                android:text="CALL"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/md_green_600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -181,7 +181,6 @@ class CreateCargoActivity : AppCompatActivity(), OnMapReadyCallback {
         packagePrice = findViewById<EditText>(R.id.priceEditTxt).text
         deliveryNote = findViewById<EditText>(R.id.deliveryNoteEditTxt).text
 
-
         val packageWeightAsFloat: Float
         val packagePriceAsFloat: Float
 

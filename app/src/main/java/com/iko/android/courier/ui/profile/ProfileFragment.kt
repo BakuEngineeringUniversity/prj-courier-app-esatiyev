@@ -1,5 +1,6 @@
 package com.iko.android.courier.ui.profile
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -21,6 +22,11 @@ import com.iko.android.courier.R
 import com.iko.android.courier.UserManager
 import com.iko.android.courier.ui.profile.balance.BalanceFragment
 import com.iko.android.courier.ui.profile.review.ReviewFragment
+import com.iko.android.courier.ui.settings.SettingsActivity
+
+import android.app.AlertDialog
+import android.net.Uri
+
 
 
 class ProfileFragment : Fragment() {
@@ -68,10 +74,13 @@ class ProfileFragment : Fragment() {
                 }
                 R.id.menu_settings -> {
                     drawerLayout.closeDrawer(Gravity.RIGHT)
+                    val intent = Intent(context, SettingsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.menu_customer_support -> {
                     drawerLayout.closeDrawer(Gravity.RIGHT)
+                    showCustomDialog() // Call the function to show the custom dialog
                     true
                 }
                 else -> false
@@ -124,5 +133,32 @@ class ProfileFragment : Fragment() {
 
         return view
     }
+
+
+    private fun showCustomDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.customer_support_custom_dialog, null)
+        val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView)
+        val alertDialog = dialogBuilder.create()
+
+        // Access buttons in the custom dialog
+        val btnClose = dialogView.findViewById<Button>(R.id.btnClose)
+        val btnCall = dialogView.findViewById<Button>(R.id.btnCall)
+
+        btnClose.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        btnCall.setOnClickListener {
+            // Dial 911
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:911")
+            startActivity(intent)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+
+
 
 }

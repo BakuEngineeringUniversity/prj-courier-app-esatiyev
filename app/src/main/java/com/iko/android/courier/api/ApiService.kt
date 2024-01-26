@@ -1,6 +1,7 @@
 package com.iko.android.courier.api
 
 import com.iko.android.courier.data.model.*
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -37,8 +38,8 @@ interface ApiService {
     @POST("customers")
     suspend fun createCustomer(@Body customer: Customer): Response<Customer>
 
-    @PUT("customers/{customerId}")
-    suspend fun updateCustomer(@Path("customerId") customerId: Long, @Body updatedCustomer: Customer): Customer
+    @PATCH("customers/{customerId}")
+    suspend fun updateCustomer(@Path("customerId") customerId: Long, @Body updatedCustomer: Customer): Response<ResponseBody>
 
     @DELETE("customers/{customerId}")
     suspend fun deleteCustomer(@Path("customerId") customerId: Long)

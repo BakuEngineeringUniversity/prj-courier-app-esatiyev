@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isNotEmpty
@@ -31,6 +32,7 @@ class CourierCargoListFragment : Fragment() {
     // Create a delay (in milliseconds) for double-click detection
     private val doubleClickDelay: Long = 300
 
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +40,8 @@ class CourierCargoListFragment : Fragment() {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_courier_cargo_list, container, false)
 
+        progressBar = requireActivity().findViewById<ProgressBar>(R.id.awaiting_courier_cargo_progress_bar)
+        progressBar.visibility = View.VISIBLE
         fetchPackages()
 
         return rootView
@@ -51,6 +55,7 @@ class CourierCargoListFragment : Fragment() {
                 val packages = apiService.getAllPackages()
 
                 showPackages(packages)
+                progressBar.visibility = View.GONE
             } catch (e: Exception) {
                 Log.e("CargoManagementActivity", "Error fetching packages: ${e.message}")
             }
